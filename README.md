@@ -1,119 +1,80 @@
 # SIGA — Sistema Informático de Gestión Académica
 
-Aplicación web para la **detección temprana de deserción académica**: monitorea el riesgo de los estudiantes, asigna mentores y gestiona tickets de seguimiento desde un panel de control único.
+SIGA es una aplicación web para la detección temprana del riesgo de deserción universitaria. Permite monitorear la trayectoria académica de los estudiantes y dar seguimiento a los casos en riesgo mediante tickets asignados a mentores y coordinadores académicos.
 
-![alt text](public/images/shadcn-admin.png)
+![Dashboard de SIGA](public/images/siga-dashboard.png)
 
-[![Sponsored by Clerk](https://img.shields.io/badge/Sponsored%20by-Clerk-5b6ee1?logo=clerk)](https://go.clerk.com/GttUAaK)
+## Características
 
-I've been creating dashboard UIs at work and for my personal projects. I always wanted to make a reusable collection of dashboard UI for future projects; and here it is now. While I've created a few custom components, some of the code is directly adapted from ShadcnUI examples.
+- **Dashboard de estudiantes**: tabla con niveles de riesgo, filtros y búsqueda para identificar con rapidez los casos que requieren atención.
+- **Detalle de estudiante**: trayectoria académica, participación y autopercepción en una vista consolidada.
+- **Tickets de seguimiento**: creación y listado de tickets asignados a mentores para gestionar el acompañamiento de cada estudiante.
+- **Autenticación**: acceso restringido mediante inicio de sesión.
+- **Panel de configuración**: ajustes de la aplicación y preferencias de la cuenta.
+- **Tema claro/oscuro**: interfaz adaptable a la preferencia del usuario.
 
-> This is not a starter project (template) though. I'll probably make one in the future.
+> Nota: SIGA es un MVP. Los datos de estudiantes y tickets son datos de prueba (mock) y se persisten en el localStorage del navegador; no hay backend ni API real.
 
-## Features
+## Stack tecnológico
 
-- Light/dark mode
-- Responsive
-- Accessible
-- With built-in Sidebar component
-- Global search command
-- 10+ pages
-- Extra custom components
-- RTL support
+- **React 19** con **TypeScript**
+- **Vite** como herramienta de build y desarrollo
+- **Tailwind CSS 4** y **shadcn/ui** (Radix UI) para la interfaz
+- **TanStack Router**, **TanStack Query** y **TanStack Table** para ruteo, manejo de datos y tablas
+- **React Hook Form** con **Zod** para formularios y validación
+- **Zustand** para el estado global, con persistencia en localStorage
+- **Vitest** y **Playwright** para las pruebas
 
-<details>
-<summary>Customized Components (click to expand)</summary>
+## Puesta en marcha
 
-This project uses Shadcn UI components, but some have been slightly modified for better RTL (Right-to-Left) support and other improvements. These customized components differ from the original Shadcn UI versions.
-
-If you want to update components using the Shadcn CLI (e.g., `npx shadcn@latest add <component>`), it's generally safe for non-customized components. For the listed customized ones, you may need to manually merge changes to preserve the project's modifications and avoid overwriting RTL support or other updates.
-
-> If you don't require RTL support, you can safely update the 'RTL Updated Components' via the Shadcn CLI, as these changes are primarily for RTL compatibility. The 'Modified Components' may have other customizations to consider.
-
-### Modified Components
-
-- scroll-area
-- sonner
-- separator
-
-### RTL Updated Components
-
-- alert-dialog
-- calendar
-- command
-- dialog
-- dropdown-menu
-- select
-- table
-- sheet
-- sidebar
-- switch
-
-**Notes:**
-
-- **Modified Components**: These have general updates, potentially including RTL adjustments.
-- **RTL Updated Components**: These have specific changes for RTL language support (e.g., layout, positioning).
-- For implementation details, check the source files in `src/components/ui/`.
-- All other Shadcn UI components in the project are standard and can be safely updated via the CLI.
-
-</details>
-
-## Tech Stack
-
-**UI:** [ShadcnUI](https://ui.shadcn.com) (TailwindCSS + RadixUI)
-
-**Build Tool:** [Vite](https://vitejs.dev/)
-
-**Routing:** [TanStack Router](https://tanstack.com/router/latest)
-
-**Type Checking:** [TypeScript](https://www.typescriptlang.org/)
-
-**Linting/Formatting:** [ESLint](https://eslint.org/) & [Prettier](https://prettier.io/)
-
-**Icons:** [Lucide Icons](https://lucide.dev/icons/), [Tabler Icons](https://tabler.io/icons) (Brand icons only)
-
-**Auth (partial):** [Clerk](https://go.clerk.com/GttUAaK)
-
-## Run Locally
-
-Clone the project
+Requisitos previos: **Node.js 24+** y **pnpm**.
 
 ```bash
-  git clone https://github.com/satnaing/shadcn-admin.git
+# Clonar el repositorio
+git clone https://github.com/thiagov2a/siga-app.git
+cd siga-app
+
+# Instalar dependencias
+pnpm install
+
+# Levantar el servidor de desarrollo (http://localhost:5173)
+pnpm dev
+
+# Generar el build de producción
+pnpm build
+
+# Ejecutar el linter
+pnpm lint
+
+# Ejecutar las pruebas
+pnpm test
 ```
 
-Go to the project directory
+Las pruebas se ejecutan en un navegador real. Antes de correrlas por primera vez, instálalo con:
 
 ```bash
-  cd siga-app
+pnpm test:browser:install
 ```
 
-Install dependencies
+## Estructura del proyecto
 
-```bash
-  pnpm install
+```
+src/
+├── features/
+│   ├── students/   # Dashboard de estudiantes y detalle individual
+│   ├── tickets/    # Creación y listado de tickets de seguimiento
+│   ├── auth/       # Autenticación (inicio de sesión)
+│   ├── settings/   # Panel de configuración
+│   └── errors/     # Páginas de error
+├── stores/
+│   └── students-store.ts  # Estado de estudiantes y tickets (Zustand + localStorage)
+└── components/     # Componentes compartidos de UI
 ```
 
-Start the server
+## Créditos
 
-```bash
-  pnpm run dev
-```
+SIGA se construyó sobre la plantilla [shadcn-admin](https://github.com/satnaing/shadcn-admin) de [@satnaing](https://github.com/satnaing), utilizada bajo licencia MIT.
 
-## Sponsoring this project ❤️
+## Licencia
 
-If you find this project helpful or use this in your own work, consider [sponsoring me](https://github.com/sponsors/satnaing) to support development and maintenance. You can [buy me a coffee](https://buymeacoffee.com/satnaing) as well. Don’t worry, every penny helps. Thank you! 🙏
-
-For questions or sponsorship inquiries, feel free to reach out at [satnaingdev@gmail.com](mailto:satnaingdev@gmail.com).
-
-### Current Sponsor
-
-- [Clerk](https://go.clerk.com/GttUAaK) - authentication and user management for the modern web
-
-## Author
-
-Crafted with 🤍 by [@satnaing](https://github.com/satnaing)
-
-## License
-
-Licensed under the [MIT License](https://choosealicense.com/licenses/mit/)
+Distribuido bajo la licencia [MIT](https://choosealicense.com/licenses/mit/).
