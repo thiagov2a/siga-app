@@ -1,6 +1,6 @@
-# Shadcn Admin Dashboard
+# SIGA — Sistema Informático de Gestión Académica
 
-Admin Dashboard UI crafted with Shadcn and Vite. Built with responsiveness and accessibility in mind.
+Aplicación web para la **detección temprana de deserción académica**: monitorea el riesgo de los estudiantes, asigna mentores y gestiona tickets de seguimiento desde un panel de control único.
 
 ![alt text](public/images/shadcn-admin.png)
 
@@ -85,7 +85,7 @@ Clone the project
 Go to the project directory
 
 ```bash
-  cd shadcn-admin
+  cd siga-app
 ```
 
 Install dependencies

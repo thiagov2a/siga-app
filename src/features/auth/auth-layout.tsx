@@ -12,9 +12,9 @@ export function AuthLayout({ children }: AuthLayoutProps) {
           <div className='bg-primary text-primary-foreground flex h-11 w-11 items-center justify-center rounded-xl'>
             <GraduationCap className='h-6 w-6' />
           </div>
-          <h1 className='text-xl font-bold'>Alerta Académica</h1>
+          <h1 className='text-xl font-bold'>SIGA</h1>
           <p className='text-muted-foreground text-sm'>
-            Sistema de Detección de Deserción Temprana
+            Detección temprana de deserción académica
           </p>
         </div>
         {children}
