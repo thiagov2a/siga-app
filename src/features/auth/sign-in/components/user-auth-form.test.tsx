@@ -27,20 +27,6 @@ vi.mock('@tanstack/react-router', async (importOriginal) => {
   return {
     ...actual,
     useNavigate: () => navigate,
-    Link: ({
-      children,
-      to,
-      className,
-      ...rest
-    }: {
-      children?: React.ReactNode
-      to: string
-      className?: string
-    }) => (
-      <a href={to} className={className} {...rest}>
-        {children}
-      </a>
-    ),
   }
 })
 
@@ -55,22 +41,21 @@ describe('UserAuthForm', () => {
     let emailInput: Locator
     let passwordInput: Locator
     let signInButton: Locator
-    let forgotPasswordLink: Locator
 
     beforeEach(async () => {
       vi.clearAllMocks()
       screen = await render(<UserAuthForm />)
-      emailInput = screen.getByRole('textbox', { name: /^Email$/i })
-      passwordInput = screen.getByLabelText(/^Password$/i)
-      signInButton = screen.getByRole('button', { name: /^Sign in$/i })
-      forgotPasswordLink = screen.getByText(/^Forgot password\?$/i)
+      emailInput = screen.getByRole('textbox', {
+        name: /^Correo institucional$/i,
+      })
+      passwordInput = screen.getByLabelText(/^Contraseña$/i)
+      signInButton = screen.getByRole('button', { name: /^Iniciar sesión$/i })
     })
 
-    it('renders fields, submit button, and forgot password link', async () => {
+    it('renders fields and submit button', async () => {
       await expect.element(emailInput).toBeInTheDocument()
       await expect.element(passwordInput).toBeInTheDocument()
       await expect.element(signInButton).toBeInTheDocument()
-      await expect.element(forgotPasswordLink).toBeInTheDocument()
     })
 
     it('shows validation messages when submitting empty form', async () => {
@@ -115,10 +100,13 @@ describe('UserAuthForm', () => {
       <UserAuthForm redirectTo='/settings' />
     )
 
-    await userEvent.fill(getByRole('textbox', { name: /Email/i }), 'a@b.com')
-    await userEvent.fill(getByLabelText('Password'), '1234567')
+    await userEvent.fill(
+      getByRole('textbox', { name: /Correo institucional/i }),
+      'a@b.com'
+    )
+    await userEvent.fill(getByLabelText('Contraseña'), '1234567')
 
-    await userEvent.click(getByRole('button', { name: /Sign in/i }))
+    await userEvent.click(getByRole('button', { name: /Iniciar sesión/i }))
 
     await vi.waitFor(() => expect(setUserMock).toHaveBeenCalledOnce())
     expect(setAccessTokenMock).toHaveBeenCalledOnce()

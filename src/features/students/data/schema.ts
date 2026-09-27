@@ -28,7 +28,7 @@ export const interventionStateSchema = z.union([
 ])
 export type InterventionState = z.infer<typeof interventionStateSchema>
 
-const studentSchema = z.object({
+export const studentSchema = z.object({
   id: z.string(),
   legajo: z.string(),
   nombre: z.string(),
@@ -62,7 +62,7 @@ const studentSchema = z.object({
 })
 export type Student = z.infer<typeof studentSchema>
 
-const ticketSchema = z.object({
+export const ticketSchema = z.object({
   id: z.string(),
   studentId: z.string(),
   tipoIntervencion: interventionTypeSchema,

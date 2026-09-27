@@ -1,9 +1,5 @@
 import { useNavigate } from '@tanstack/react-router'
-import { Header } from '@/components/layout/header'
-import { Main } from '@/components/layout/main'
-import { ProfileDropdown } from '@/components/profile-dropdown'
-import { Search } from '@/components/search'
-import { ThemeSwitch } from '@/components/theme-switch'
+import { useStudentsStore } from '@/stores/students-store'
 import { Card, CardContent } from '@/components/ui/card'
 import {
   Table,
@@ -13,7 +9,11 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { useStudentsStore } from '@/stores/students-store'
+import { Header } from '@/components/layout/header'
+import { Main } from '@/components/layout/main'
+import { ProfileDropdown } from '@/components/profile-dropdown'
+import { Search } from '@/components/search'
+import { ThemeSwitch } from '@/components/theme-switch'
 import { interventionStates, interventionTypes } from '../students/data/data'
 
 export function TicketsPage() {
@@ -86,7 +86,7 @@ export function TicketsPage() {
                       <TableCell className='max-w-xs truncate'>
                         {t.notas}
                       </TableCell>
-                      <TableCell className='text-muted-foreground text-sm'>
+                      <TableCell className='text-sm text-muted-foreground'>
                         {t.creadoEn.toLocaleDateString('es-AR')}
                       </TableCell>
                     </TableRow>
@@ -96,7 +96,7 @@ export function TicketsPage() {
                   <TableRow>
                     <TableCell
                       colSpan={5}
-                      className='text-muted-foreground py-8 text-center'
+                      className='py-8 text-center text-muted-foreground'
                     >
                       Todavía no se crearon tickets. Entrá al detalle de un
                       estudiante para generar el primero.

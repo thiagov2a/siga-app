@@ -29,9 +29,8 @@ export function SignIn() {
           <UserAuthForm redirectTo={redirect} />
         </CardContent>
         <CardFooter>
-          <p className='text-muted-foreground px-8 text-center text-sm'>
-            Acceso restringido al equipo de mentoría y coordinación
-            académica.
+          <p className='px-8 text-center text-sm text-muted-foreground'>
+            Acceso restringido al equipo de mentoría y coordinación académica.
           </p>
         </CardFooter>
       </Card>

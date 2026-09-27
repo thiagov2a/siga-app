@@ -1,11 +1,13 @@
 import { useMemo, useState } from 'react'
 import { useNavigate } from '@tanstack/react-router'
-import { Search, Users, Ticket as TicketIcon, CheckCircle2, AlertTriangle } from 'lucide-react'
-import { Header } from '@/components/layout/header'
-import { Main } from '@/components/layout/main'
-import { ProfileDropdown } from '@/components/profile-dropdown'
-import { Search as CommandSearch } from '@/components/search'
-import { ThemeSwitch } from '@/components/theme-switch'
+import {
+  Search,
+  Users,
+  Ticket as TicketIcon,
+  CheckCircle2,
+  AlertTriangle,
+} from 'lucide-react'
+import { useStudentsStore } from '@/stores/students-store'
 import { Card, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import {
@@ -15,10 +17,21 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
-import { useStudentsStore } from '@/stores/students-store'
-import { necesidades } from './data/data'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table'
+import { Header } from '@/components/layout/header'
+import { Main } from '@/components/layout/main'
+import { ProfileDropdown } from '@/components/profile-dropdown'
+import { Search as CommandSearch } from '@/components/search'
+import { ThemeSwitch } from '@/components/theme-switch'
 import { RiskBadge, TicketStatusBadge } from './components/risk-badge'
+import { necesidades } from './data/data'
 import type { RiskLevel } from './data/schema'
 
 export function StudentsDashboard() {
@@ -106,7 +119,7 @@ export function StudentsDashboard() {
         <Card className='mb-4'>
           <CardContent className='flex flex-col gap-3 p-4 sm:flex-row sm:items-center'>
             <div className='relative flex-1'>
-              <Search className='text-muted-foreground absolute left-2.5 top-2.5 h-4 w-4' />
+              <Search className='absolute top-2.5 left-2.5 h-4 w-4 text-muted-foreground' />
               <Input
                 placeholder='Buscar alumno, ID...'
                 className='pl-8'
@@ -171,7 +184,7 @@ export function StudentsDashboard() {
                   >
                     <TableCell>
                       <div className='font-medium'>{s.nombre}</div>
-                      <div className='text-muted-foreground text-xs'>
+                      <div className='text-xs text-muted-foreground'>
                         ID: {s.legajo}
                       </div>
                     </TableCell>
@@ -191,9 +204,7 @@ export function StudentsDashboard() {
                       hace {s.ultimoAccesoCampusDias}{' '}
                       {s.ultimoAccesoCampusDias === 1 ? 'día' : 'días'}
                     </TableCell>
-                    <TableCell>
-                      {s.autopercepcion.necesidadPrincipal}
-                    </TableCell>
+                    <TableCell>{s.autopercepcion.necesidadPrincipal}</TableCell>
                     <TableCell>
                       <TicketStatusBadge status={s.estadoTicket} />
                     </TableCell>
@@ -203,7 +214,7 @@ export function StudentsDashboard() {
                   <TableRow>
                     <TableCell
                       colSpan={6}
-                      className='text-muted-foreground py-8 text-center'
+                      className='py-8 text-center text-muted-foreground'
                     >
                       No se encontraron estudiantes con esos filtros.
                     </TableCell>
@@ -213,7 +224,7 @@ export function StudentsDashboard() {
             </Table>
           </CardContent>
         </Card>
-        <p className='text-muted-foreground mt-3 text-sm'>
+        <p className='mt-3 text-sm text-muted-foreground'>
           Mostrando {filtered.length} de {students.length} estudiantes
         </p>
       </Main>
@@ -237,14 +248,14 @@ function SummaryCard({
   return (
     <Card>
       <CardContent className='p-4'>
-        <div className='text-muted-foreground flex items-center justify-between text-xs font-medium tracking-wide'>
+        <div className='flex items-center justify-between text-xs font-medium tracking-wide text-muted-foreground'>
           {label}
           <Icon className='h-4 w-4' />
         </div>
         <div className={`mt-1 text-2xl font-bold ${valueClass ?? ''}`}>
           {value}
         </div>
-        <div className='text-muted-foreground text-xs'>{sub}</div>
+        <div className='text-xs text-muted-foreground'>{sub}</div>
       </CardContent>
     </Card>
   )

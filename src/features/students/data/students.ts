@@ -20,9 +20,7 @@ export const students: Student[] = [
     ultimoAccesoCampusDias: 4,
     entregasPendientes: 4,
     consultasDocente: 0,
-    actividadUltimos14Dias: act([
-      1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,
-    ]),
+    actividadUltimos14Dias: act([1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0]),
     autopercepcion: {
       organizacion: 2,
       acompaniamiento: 4,
@@ -52,9 +50,7 @@ export const students: Student[] = [
     ultimoAccesoCampusDias: 2,
     entregasPendientes: 1,
     consultasDocente: 2,
-    actividadUltimos14Dias: act([
-      1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 0, 1, 0,
-    ]),
+    actividadUltimos14Dias: act([1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 0, 1, 0]),
     autopercepcion: {
       organizacion: 3,
       acompaniamiento: 3,
@@ -83,9 +79,7 @@ export const students: Student[] = [
     ultimoAccesoCampusDias: 8,
     entregasPendientes: 6,
     consultasDocente: 0,
-    actividadUltimos14Dias: act([
-      1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    ]),
+    actividadUltimos14Dias: act([1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]),
     autopercepcion: {
       organizacion: 2,
       acompaniamiento: 2,
@@ -114,9 +108,7 @@ export const students: Student[] = [
     ultimoAccesoCampusDias: 1,
     entregasPendientes: 0,
     consultasDocente: 3,
-    actividadUltimos14Dias: act([
-      1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1,
-    ]),
+    actividadUltimos14Dias: act([1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1]),
     autopercepcion: {
       organizacion: 4,
       acompaniamiento: 5,
@@ -145,9 +137,7 @@ export const students: Student[] = [
     ultimoAccesoCampusDias: 3,
     entregasPendientes: 2,
     consultasDocente: 1,
-    actividadUltimos14Dias: act([
-      1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0,
-    ]),
+    actividadUltimos14Dias: act([1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0]),
     autopercepcion: {
       organizacion: 2,
       acompaniamiento: 3,
@@ -176,9 +166,7 @@ export const students: Student[] = [
     ultimoAccesoCampusDias: 6,
     entregasPendientes: 5,
     consultasDocente: 0,
-    actividadUltimos14Dias: act([
-      1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    ]),
+    actividadUltimos14Dias: act([1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]),
     autopercepcion: {
       organizacion: 2,
       acompaniamiento: 2,
@@ -207,9 +195,7 @@ export const students: Student[] = [
     ultimoAccesoCampusDias: 1,
     entregasPendientes: 1,
     consultasDocente: 4,
-    actividadUltimos14Dias: act([
-      1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1,
-    ]),
+    actividadUltimos14Dias: act([1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1]),
     autopercepcion: {
       organizacion: 4,
       acompaniamiento: 4,
@@ -238,16 +224,15 @@ export const students: Student[] = [
     ultimoAccesoCampusDias: 2,
     entregasPendientes: 2,
     consultasDocente: 1,
-    actividadUltimos14Dias: act([
-      1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1,
-    ]),
+    actividadUltimos14Dias: act([1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1]),
     autopercepcion: {
       organizacion: 3,
       acompaniamiento: 2,
       comprensionContenidos: 3,
       sabeDondePedirAyuda: 3,
       necesidadPrincipal: 'Información institucional',
-      comentario: 'Tengo un familiar enfermo y me está costando seguir el ritmo.',
+      comentario:
+        'Tengo un familiar enfermo y me está costando seguir el ritmo.',
     },
     riesgo: 'medio',
     estadoTicket: 'sin_asignar',

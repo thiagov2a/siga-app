@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { toast } from 'sonner'
+import { useStudentsStore } from '@/stores/students-store'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 import {
@@ -19,7 +20,6 @@ import {
   SheetTitle,
 } from '@/components/ui/sheet'
 import { Textarea } from '@/components/ui/textarea'
-import { useStudentsStore } from '@/stores/students-store'
 import { interventionStates, interventionTypes } from '../data/data'
 import type {
   InterventionState,
@@ -43,7 +43,9 @@ export function CreateTicketSheet({ student, open, onOpenChange }: Props) {
 
   const handleSubmit = () => {
     if (!notas.trim()) {
-      toast.error('Agregá una nota o diagnóstico inicial antes de crear el ticket.')
+      toast.error(
+        'Agregá una nota o diagnóstico inicial antes de crear el ticket.'
+      )
       return
     }
 

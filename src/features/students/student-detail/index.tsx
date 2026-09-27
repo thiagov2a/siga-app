@@ -1,25 +1,23 @@
 import { useState } from 'react'
 import { Link, useParams } from '@tanstack/react-router'
-import {
-  ArrowLeft,
-  BookOpen,
-  Activity,
-  UserCircle,
-  Plus,
-} from 'lucide-react'
+import { ArrowLeft, BookOpen, Activity, UserCircle, Plus } from 'lucide-react'
+import { useStudentsStore } from '@/stores/students-store'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Header } from '@/components/layout/header'
 import { Main } from '@/components/layout/main'
 import { ProfileDropdown } from '@/components/profile-dropdown'
 import { Search } from '@/components/search'
 import { ThemeSwitch } from '@/components/theme-switch'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { useStudentsStore } from '@/stores/students-store'
 import { CreateTicketSheet } from '../components/create-ticket-sheet'
 import { ProgressBar, RiskBadge } from '../components/risk-badge'
 
 const autopercepcionLabels: {
-  key: 'organizacion' | 'acompaniamiento' | 'comprensionContenidos' | 'sabeDondePedirAyuda'
+  key:
+    | 'organizacion'
+    | 'acompaniamiento'
+    | 'comprensionContenidos'
+    | 'sabeDondePedirAyuda'
   label: string
 }[] = [
   { key: 'organizacion', label: 'Organización de tiempos' },
@@ -33,9 +31,7 @@ export function StudentDetail() {
     from: '/_authenticated/students/$studentId',
   })
   const student = useStudentsStore((s) => s.getStudent(studentId))
-  const tickets = useStudentsStore((s) =>
-    s.getTicketsForStudent(studentId)
-  )
+  const tickets = useStudentsStore((s) => s.getTicketsForStudent(studentId))
   const [sheetOpen, setSheetOpen] = useState(false)
 
   if (!student) {
@@ -59,7 +55,7 @@ export function StudentDetail() {
       <Main>
         <Link
           to='/students'
-          className='text-muted-foreground hover:text-foreground mb-4 inline-flex items-center gap-1 text-sm'
+          className='mb-4 inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground'
         >
           <ArrowLeft className='h-4 w-4' />
           Volver a estudiantes
@@ -67,7 +63,7 @@ export function StudentDetail() {
 
         <div className='mb-6 flex flex-wrap items-center justify-between gap-4'>
           <div className='flex items-center gap-3'>
-            <div className='bg-primary/10 text-primary flex h-11 w-11 items-center justify-center rounded-full text-lg font-semibold'>
+            <div className='flex h-11 w-11 items-center justify-center rounded-full bg-primary/10 text-lg font-semibold text-primary'>
               {student.nombre
                 .split(' ')
                 .slice(0, 2)
@@ -79,8 +75,9 @@ export function StudentDetail() {
                 <h1 className='text-xl font-bold'>{student.nombre}</h1>
                 <RiskBadge risk={student.riesgo} />
               </div>
-              <p className='text-muted-foreground text-sm'>
-                Matrícula: ID {student.legajo} · {student.carrera} · {student.semestre}° Semestre
+              <p className='text-sm text-muted-foreground'>
+                Matrícula: ID {student.legajo} · {student.carrera} ·{' '}
+                {student.semestre}° Semestre
               </p>
             </div>
           </div>
@@ -169,7 +166,7 @@ export function StudentDetail() {
                   />
                 </div>
                 <div>
-                  <p className='text-muted-foreground mb-2 text-xs font-medium tracking-wide'>
+                  <p className='mb-2 text-xs font-medium tracking-wide text-muted-foreground'>
                     ACTIVIDAD CAMPUS VIRTUAL (últimos 14 días)
                   </p>
                   <div className='flex gap-1.5'>
@@ -195,15 +192,12 @@ export function StudentDetail() {
                 </CardHeader>
                 <CardContent className='space-y-3'>
                   {tickets.map((t) => (
-                    <div
-                      key={t.id}
-                      className='rounded-md border p-3 text-sm'
-                    >
+                    <div key={t.id} className='rounded-md border p-3 text-sm'>
                       <div className='mb-1 flex items-center justify-between'>
                         <span className='font-medium capitalize'>
                           {t.tipoIntervencion.replace(/_/g, ' ')}
                         </span>
-                        <span className='text-muted-foreground text-xs capitalize'>
+                        <span className='text-xs text-muted-foreground capitalize'>
                           {t.estado.replace(/_/g, ' ')}
                         </span>
                       </div>
@@ -278,7 +272,7 @@ function Stat({
 }) {
   return (
     <div>
-      <p className='text-muted-foreground text-xs font-medium tracking-wide'>
+      <p className='text-xs font-medium tracking-wide text-muted-foreground'>
         {label}
       </p>
       <p className={`text-lg font-bold ${valueClass ?? ''}`}>{value}</p>

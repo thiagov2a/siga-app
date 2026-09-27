@@ -63,15 +63,14 @@ export const ticketStatuses: {
   },
 ]
 
-export const interventionTypes: { value: InterventionType; label: string }[] =
-  [
-    { value: 'tutor_mentor', label: 'Tutor / Mentor académico' },
-    { value: 'ayuda_contenidos', label: 'Ayuda con contenidos' },
-    {
-      value: 'informacion_institucional',
-      label: 'Información institucional',
-    },
-  ]
+export const interventionTypes: { value: InterventionType; label: string }[] = [
+  { value: 'tutor_mentor', label: 'Tutor / Mentor académico' },
+  { value: 'ayuda_contenidos', label: 'Ayuda con contenidos' },
+  {
+    value: 'informacion_institucional',
+    label: 'Información institucional',
+  },
+]
 
 export const interventionStates: {
   value: InterventionState

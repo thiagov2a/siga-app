@@ -23,7 +23,10 @@ export function TicketStatusBadge({
   status: 'sin_asignar' | 'en_seguimiento' | 'resuelto'
 }) {
   const cfg = {
-    sin_asignar: { label: 'Sin asignar', cls: 'bg-muted text-muted-foreground' },
+    sin_asignar: {
+      label: 'Sin asignar',
+      cls: 'bg-muted text-muted-foreground',
+    },
     en_seguimiento: {
       label: 'En seguimiento',
       cls: 'bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-400',

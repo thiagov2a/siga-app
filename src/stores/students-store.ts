@@ -1,7 +1,11 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
+import type {
+  Student,
+  Ticket,
+  TicketStatus,
+} from '@/features/students/data/schema'
 import { students as seedStudents } from '@/features/students/data/students'
-import type { Student, Ticket, TicketStatus } from '@/features/students/data/schema'
 
 interface StudentsState {
   students: Student[]
