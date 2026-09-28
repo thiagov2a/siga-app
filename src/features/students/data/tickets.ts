@@ -5,7 +5,8 @@ export const tickets: Ticket[] = [
     id: 't1',
     studentId: '2',
     tipoIntervencion: 'informacion_institucional',
-    notas: 'Consultó por conectividad para cursar en modalidad virtual. Se le envió información sobre becas de conectividad y espacios de estudio en la sede.',
+    notas:
+      'Consultó por conectividad para cursar en modalidad virtual. Se le envió información sobre becas de conectividad y espacios de estudio en la sede.',
     estado: 'pendiente',
     resultado: undefined,
     creadoEn: new Date('2026-09-14'),
@@ -15,7 +16,8 @@ export const tickets: Ticket[] = [
     id: 't2',
     studentId: '2',
     tipoIntervencion: 'tutor_mentor',
-    notas: 'Seguimiento por dificultades para sostener la cursada virtual. Se coordinó un espacio de tutoría quincenal.',
+    notas:
+      'Seguimiento por dificultades para sostener la cursada virtual. Se coordinó un espacio de tutoría quincenal.',
     estado: 'en_curso',
     resultado: undefined,
     creadoEn: new Date('2026-09-18'),
@@ -25,7 +27,8 @@ export const tickets: Ticket[] = [
     id: 't3',
     studentId: '3',
     tipoIntervencion: 'tutor_mentor',
-    notas: 'Se asignó mentor por riesgo alto. Primer encuentro realizado: se acordó plan de apoyo semanal y contacto con la coordinación.',
+    notas:
+      'Se asignó mentor por riesgo alto. Primer encuentro realizado: se acordó plan de apoyo semanal y contacto con la coordinación.',
     estado: 'en_curso',
     resultado: undefined,
     creadoEn: new Date('2026-09-10'),
@@ -45,7 +48,8 @@ export const tickets: Ticket[] = [
     id: 't5',
     studentId: '6',
     tipoIntervencion: 'tutor_mentor',
-    notas: 'Pidió orientación vocacional y acompañamiento. Se agendó entrevista con mentor.',
+    notas:
+      'Pidió orientación vocacional y acompañamiento. Se agendó entrevista con mentor.',
     estado: 'pendiente',
     resultado: undefined,
     creadoEn: new Date('2026-09-16'),
@@ -55,7 +59,8 @@ export const tickets: Ticket[] = [
     id: 't6',
     studentId: '6',
     tipoIntervencion: 'informacion_institucional',
-    notas: 'Se brindó información sobre cambios de carrera y equivalencias. En seguimiento.',
+    notas:
+      'Se brindó información sobre cambios de carrera y equivalencias. En seguimiento.',
     estado: 'en_curso',
     resultado: undefined,
     creadoEn: new Date('2026-09-12'),
@@ -65,7 +70,8 @@ export const tickets: Ticket[] = [
     id: 't7',
     studentId: '4',
     tipoIntervencion: 'tutor_mentor',
-    notas: 'Acompañamiento durante el ingreso a la carrera. Alumna reincorporada al ritmo de cursada.',
+    notas:
+      'Acompañamiento durante el ingreso a la carrera. Alumna reincorporada al ritmo de cursada.',
     estado: 'cerrado',
     resultado: 'reincorporado',
     creadoEn: new Date('2026-09-02'),
@@ -75,7 +81,8 @@ export const tickets: Ticket[] = [
     id: 't8',
     studentId: '7',
     tipoIntervencion: 'ayuda_contenidos',
-    notas: 'Apoyo puntual en matemáticas avanzada. Se ofrecieron talleres de refuerzo.',
+    notas:
+      'Apoyo puntual en matemáticas avanzada. Se ofrecieron talleres de refuerzo.',
     estado: 'cerrado',
     resultado: 'sin_cambios',
     creadoEn: new Date('2026-09-05'),

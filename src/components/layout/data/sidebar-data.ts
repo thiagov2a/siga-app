@@ -1,9 +1,4 @@
-import {
-  LayoutDashboard,
-  Ticket,
-  Users,
-  GraduationCap,
-} from 'lucide-react'
+import { LayoutDashboard, Ticket, Users, GraduationCap } from 'lucide-react'
 import { type SidebarData } from '../types'
 
 export const sidebarData: SidebarData = {

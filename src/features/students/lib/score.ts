@@ -87,7 +87,8 @@ const SCORE_CONFIG = {
     riesgo0: 5,
     riesgo100: 1,
     valor: (s) => s.autopercepcion.sabeDondePedirAyuda,
-    texto: (s) => `Sabe dónde pedir ayuda: ${s.autopercepcion.sabeDondePedirAyuda}/5`,
+    texto: (s) =>
+      `Sabe dónde pedir ayuda: ${s.autopercepcion.sabeDondePedirAyuda}/5`,
   },
 } satisfies Record<string, Variable>
 
@@ -110,7 +111,11 @@ export function calcularScore(student: Student): Score {
   const contribuciones = Object.values(SCORE_CONFIG).map((variable) => ({
     texto: variable.texto(student),
     contribucion:
-      (riesgoLineal(variable.valor(student), variable.riesgo0, variable.riesgo100) *
+      (riesgoLineal(
+        variable.valor(student),
+        variable.riesgo0,
+        variable.riesgo100
+      ) *
         variable.peso) /
       100,
   }))
@@ -118,8 +123,7 @@ export function calcularScore(student: Student): Score {
   const suma = contribuciones.reduce((acc, c) => acc + c.contribucion, 0)
   const valor = Math.round(suma * 10) / 10
 
-  const nivel: RiskLevel =
-    valor >= 50 ? 'alto' : valor >= 20 ? 'medio' : 'bajo'
+  const nivel: RiskLevel = valor >= 50 ? 'alto' : valor >= 20 ? 'medio' : 'bajo'
 
   const factores = contribuciones
     .filter((c) => c.contribucion > 0)

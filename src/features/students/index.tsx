@@ -31,9 +31,9 @@ import { ProfileDropdown } from '@/components/profile-dropdown'
 import { Search as CommandSearch } from '@/components/search'
 import { ThemeSwitch } from '@/components/theme-switch'
 import { RiskBadge, TicketStatusBadge } from './components/risk-badge'
-import { calcularScore } from './lib/score'
 import { necesidades } from './data/data'
 import type { RiskLevel } from './data/schema'
+import { calcularScore } from './lib/score'
 
 export function StudentsDashboard() {
   const navigate = useNavigate()

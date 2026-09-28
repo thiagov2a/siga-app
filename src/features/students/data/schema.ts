@@ -61,10 +61,7 @@ export const studentSchema = z.object({
 })
 export type Student = z.infer<typeof studentSchema>
 
-const ticketOriginSchema = z.union([
-  z.literal('alumno'),
-  z.literal('mentor'),
-])
+const ticketOriginSchema = z.union([z.literal('alumno'), z.literal('mentor')])
 
 export const ticketSchema = z.object({
   id: z.string(),
