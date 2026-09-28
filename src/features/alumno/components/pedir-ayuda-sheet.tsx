@@ -11,6 +11,13 @@ import {
 import { Textarea } from '@/components/ui/textarea'
 import type { InterventionType } from '@/features/students/data/schema'
 
+// Fuera de localhost/HTTPS el navegador no trae crypto.randomUUID
+if (typeof crypto.randomUUID !== 'function') {
+  Object.defineProperty(crypto, 'randomUUID', {
+    value: () => `${Date.now()}-${Math.random().toString(16).slice(2)}`,
+  })
+}
+
 const OPCIONES: { valor: InterventionType; titulo: string }[] = [
   { valor: 'tutor_mentor', titulo: 'Hablar con un mentor' },
   { valor: 'ayuda_contenidos', titulo: 'Ayuda con los contenidos' },
