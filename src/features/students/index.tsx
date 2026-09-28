@@ -31,6 +31,7 @@ import { ProfileDropdown } from '@/components/profile-dropdown'
 import { Search as CommandSearch } from '@/components/search'
 import { ThemeSwitch } from '@/components/theme-switch'
 import { RiskBadge, TicketStatusBadge } from './components/risk-badge'
+import { calcularScore } from './lib/score'
 import { necesidades } from './data/data'
 import type { RiskLevel } from './data/schema'
 
@@ -43,21 +44,26 @@ export function StudentsDashboard() {
   const [riskFilter, setRiskFilter] = useState<RiskLevel | 'todos'>('todos')
   const [needFilter, setNeedFilter] = useState<string>('todos')
 
+  const conScore = useMemo(
+    () => students.map((s) => ({ student: s, score: calcularScore(s) })),
+    [students]
+  )
+
   const filtered = useMemo(() => {
-    return students.filter((s) => {
+    return conScore.filter(({ student: s, score }) => {
       const matchesSearch =
         search.trim() === '' ||
         s.nombre.toLowerCase().includes(search.toLowerCase()) ||
         s.legajo.includes(search)
-      const matchesRisk = riskFilter === 'todos' || s.riesgo === riskFilter
+      const matchesRisk = riskFilter === 'todos' || score.nivel === riskFilter
       const matchesNeed =
         needFilter === 'todos' ||
         s.autopercepcion.necesidadPrincipal === needFilter
       return matchesSearch && matchesRisk && matchesNeed
     })
-  }, [students, search, riskFilter, needFilter])
+  }, [conScore, search, riskFilter, needFilter])
 
-  const riskAlto = students.filter((s) => s.riesgo === 'alto').length
+  const riskAlto = conScore.filter(({ score }) => score.nivel === 'alto').length
   const ticketsAbiertos = students.filter(
     (s) => s.estadoTicket !== 'resuelto'
   ).length
@@ -171,7 +177,7 @@ export function StudentsDashboard() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {filtered.map((s) => (
+                {filtered.map(({ student: s, score }) => (
                   <TableRow
                     key={s.id}
                     className='cursor-pointer'
@@ -189,7 +195,7 @@ export function StudentsDashboard() {
                       </div>
                     </TableCell>
                     <TableCell>
-                      <RiskBadge risk={s.riesgo} />
+                      <RiskBadge risk={score.nivel} />
                     </TableCell>
                     <TableCell
                       className={

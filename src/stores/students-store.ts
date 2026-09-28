@@ -6,12 +6,12 @@ import type {
   TicketStatus,
 } from '@/features/students/data/schema'
 import { students as seedStudents } from '@/features/students/data/students'
+import { tickets as seedTickets } from '@/features/students/data/tickets'
 
 interface StudentsState {
   students: Student[]
   tickets: Ticket[]
   getStudent: (id: string) => Student | undefined
-  getTicketsForStudent: (studentId: string) => Ticket[]
   createTicket: (
     ticket: Omit<Ticket, 'id' | 'creadoEn'>,
     newTicketStatus?: TicketStatus
@@ -25,12 +25,8 @@ export const useStudentsStore = create<StudentsState>()(
   persist(
     (set, get) => ({
       students: seedStudents,
-      tickets: [],
+      tickets: seedTickets,
       getStudent: (id) => get().students.find((s) => s.id === id),
-      getTicketsForStudent: (studentId) =>
-        get()
-          .tickets.filter((t) => t.studentId === studentId)
-          .sort((a, b) => b.creadoEn.getTime() - a.creadoEn.getTime()),
       createTicket: (ticket, newTicketStatus = 'en_seguimiento') => {
         const newTicket: Ticket = {
           ...ticket,
@@ -60,7 +56,7 @@ export const useStudentsStore = create<StudentsState>()(
           ),
         }))
       },
-      reset: () => set({ students: seedStudents, tickets: [] }),
+      reset: () => set({ students: seedStudents, tickets: seedTickets }),
     }),
     {
       name: 'alerta-academica-storage',
@@ -68,6 +64,18 @@ export const useStudentsStore = create<StudentsState>()(
         students: state.students,
         tickets: state.tickets,
       }),
+      merge: (persisted, current) => {
+        const state = persisted as Partial<StudentsState>
+        return {
+          ...current,
+          ...state,
+          students: state.students ?? current.students,
+          tickets: (state.tickets ?? current.tickets).map((t) => ({
+            ...t,
+            creadoEn: new Date(t.creadoEn),
+          })),
+        }
+      },
     }
   )
 )

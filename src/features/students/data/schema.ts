@@ -57,10 +57,14 @@ export const studentSchema = z.object({
     necesidadPrincipal: z.string(),
     comentario: z.string(),
   }),
-  riesgo: riskLevelSchema,
   estadoTicket: ticketStatusSchema,
 })
 export type Student = z.infer<typeof studentSchema>
+
+const ticketOriginSchema = z.union([
+  z.literal('alumno'),
+  z.literal('mentor'),
+])
 
 export const ticketSchema = z.object({
   id: z.string(),
@@ -70,5 +74,6 @@ export const ticketSchema = z.object({
   estado: interventionStateSchema,
   resultado: z.string().optional(),
   creadoEn: z.coerce.date(),
+  origen: ticketOriginSchema,
 })
 export type Ticket = z.infer<typeof ticketSchema>

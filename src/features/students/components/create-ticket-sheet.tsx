@@ -56,6 +56,7 @@ export function CreateTicketSheet({ student, open, onOpenChange }: Props) {
         notas,
         estado,
         resultado: estado === 'cerrado' ? resultado : undefined,
+        origen: 'mentor',
       },
       estado === 'cerrado' ? 'resuelto' : 'en_seguimiento'
     )

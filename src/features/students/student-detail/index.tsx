@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { Link, useParams } from '@tanstack/react-router'
 import { ArrowLeft, BookOpen, Activity, UserCircle, Plus } from 'lucide-react'
 import { useStudentsStore } from '@/stores/students-store'
@@ -11,6 +11,7 @@ import { Search } from '@/components/search'
 import { ThemeSwitch } from '@/components/theme-switch'
 import { CreateTicketSheet } from '../components/create-ticket-sheet'
 import { ProgressBar, RiskBadge } from '../components/risk-badge'
+import { calcularScore } from '../lib/score'
 
 const autopercepcionLabels: {
   key:
@@ -31,8 +32,16 @@ export function StudentDetail() {
     from: '/_authenticated/students/$studentId',
   })
   const student = useStudentsStore((s) => s.getStudent(studentId))
-  const tickets = useStudentsStore((s) => s.getTicketsForStudent(studentId))
+  const allTickets = useStudentsStore((s) => s.tickets)
   const [sheetOpen, setSheetOpen] = useState(false)
+
+  const tickets = useMemo(
+    () =>
+      allTickets
+        .filter((t) => t.studentId === studentId)
+        .sort((a, b) => b.creadoEn.getTime() - a.creadoEn.getTime()),
+    [allTickets, studentId]
+  )
 
   if (!student) {
     return (
@@ -41,6 +50,8 @@ export function StudentDetail() {
       </Main>
     )
   }
+
+  const score = calcularScore(student)
 
   return (
     <>
@@ -73,11 +84,15 @@ export function StudentDetail() {
             <div>
               <div className='flex items-center gap-2'>
                 <h1 className='text-xl font-bold'>{student.nombre}</h1>
-                <RiskBadge risk={student.riesgo} />
+                <RiskBadge risk={score.nivel} />
               </div>
               <p className='text-sm text-muted-foreground'>
                 Matrícula: ID {student.legajo} · {student.carrera} ·{' '}
                 {student.semestre}° Semestre
+              </p>
+              <p className='text-sm text-muted-foreground'>
+                Score {Math.round(score.valor)}/100 · Factores principales:{' '}
+                {score.factores.join(', ')}
               </p>
             </div>
           </div>
