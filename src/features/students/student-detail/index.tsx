@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import { Link, useParams } from '@tanstack/react-router'
 import { ArrowLeft, BookOpen, Activity, UserCircle, Plus } from 'lucide-react'
 import { useStudentsStore } from '@/stores/students-store'
+import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Header } from '@/components/layout/header'
@@ -11,6 +12,7 @@ import { Search } from '@/components/search'
 import { ThemeSwitch } from '@/components/theme-switch'
 import { CreateTicketSheet } from '../components/create-ticket-sheet'
 import { ProgressBar, RiskBadge } from '../components/risk-badge'
+import { riskLevels } from '../data/data'
 import { calcularScore } from '../lib/score'
 
 const autopercepcionLabels: {
@@ -52,6 +54,7 @@ export function StudentDetail() {
   }
 
   const score = calcularScore(student)
+  const riskCfg = riskLevels.find((r) => r.value === score.nivel)!
 
   return (
     <>
@@ -90,10 +93,26 @@ export function StudentDetail() {
                 Matrícula: ID {student.legajo} · {student.carrera} ·{' '}
                 {student.semestre}° Semestre
               </p>
-              <p className='text-sm text-muted-foreground'>
-                Score {Math.round(score.valor)}/100 · Factores principales:{' '}
-                {score.factores.join(', ')}
-              </p>
+              <div className='mt-1 flex items-center gap-2'>
+                <div className='w-40'>
+                  <ProgressBar
+                    value={score.valor}
+                    colorClass={riskCfg.dotClass}
+                  />
+                </div>
+                <span className='text-sm font-medium'>
+                  {Math.round(score.valor)}/100
+                </span>
+              </div>
+              {score.factores.length > 0 && (
+                <div className='mt-1.5 flex flex-wrap gap-1.5'>
+                  {score.factores.map((factor) => (
+                    <Badge key={factor} variant='secondary'>
+                      {factor}
+                    </Badge>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
           <Button onClick={() => setSheetOpen(true)}>
@@ -189,7 +208,7 @@ export function StudentDetail() {
                       <span
                         key={i}
                         className={`h-6 flex-1 rounded ${
-                          active ? 'bg-primary' : 'bg-muted'
+                          active ? 'bg-brand-accent' : 'bg-muted'
                         }`}
                       />
                     ))}

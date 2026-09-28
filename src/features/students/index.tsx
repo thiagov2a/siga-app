@@ -180,7 +180,7 @@ export function StudentsDashboard() {
                 {filtered.map(({ student: s, score }) => (
                   <TableRow
                     key={s.id}
-                    className='cursor-pointer'
+                    className='cursor-pointer transition-colors hover:bg-muted/50'
                     onClick={() =>
                       navigate({
                         to: '/students/$studentId',
@@ -252,7 +252,7 @@ function SummaryCard({
   valueClass?: string
 }) {
   return (
-    <Card>
+    <Card className='transition-shadow hover:shadow-md'>
       <CardContent className='p-4'>
         <div className='flex items-center justify-between text-xs font-medium tracking-wide text-muted-foreground'>
           {label}
