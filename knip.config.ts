@@ -1,7 +1,7 @@
 import type { KnipConfig } from 'knip'
 
 const config: KnipConfig = {
-  ignore: ['src/components/ui/**', 'src/tanstack-table.d.ts'],
+  ignore: ['src/components/ui/**'],
   // Zona protegida del MVP (features/students): `ticketStatuses` es un
   // catálogo de estados todavía sin consumir en la UI. No se elimina sin
   // aprobación explícita; se silencia únicamente el issue de exports de
