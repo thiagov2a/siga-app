@@ -1,8 +1,9 @@
+import { useState } from 'react'
 import { createFileRoute } from '@tanstack/react-router'
 import { useAuthStore } from '@/stores/auth-store'
+import { useStudentsStore } from '@/stores/students-store'
 import { Button } from '@/components/ui/button'
-import { students } from '@/features/students/data/students'
-import { tickets } from '@/features/students/data/tickets'
+import { PedirAyudaSheet } from '@/features/alumno/components/pedir-ayuda-sheet'
 import { calcularScore } from '@/features/students/lib/score'
 
 export const Route = createFileRoute('/alumno/')({
@@ -26,7 +27,11 @@ const CIRCUNFERENCIA = 2 * Math.PI * RADIO
 
 function Inicio() {
   const userId = useAuthStore((s) => s.userId)
-  const alumno = students.find((s) => s.id === userId)
+  const alumno = useStudentsStore((s) =>
+    s.students.find((x) => x.id === userId)
+  )
+  const tickets = useStudentsStore((s) => s.tickets)
+  const [abierto, setAbierto] = useState(false)
 
   if (!alumno) {
     return <p className='p-4'>No encontramos tu perfil. Volvé a ingresar.</p>
@@ -94,12 +99,19 @@ function Inicio() {
 
       {ticketAbierto && (
         <div className='rounded-md border border-amber-500 bg-amber-100 p-3 text-sm text-amber-900'>
-          {' '}
           Tenés un pedido de ayuda en curso. Podés verlo en la pestaña Tickets.
         </div>
       )}
 
-      <Button className='w-full'>Pedir ayuda</Button>
+      <Button className='w-full' onClick={() => setAbierto(true)}>
+        Pedir ayuda
+      </Button>
+
+      <PedirAyudaSheet
+        open={abierto}
+        onOpenChange={setAbierto}
+        studentId={alumno.id}
+      />
     </div>
   )
 }
