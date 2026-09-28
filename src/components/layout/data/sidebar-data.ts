@@ -1,4 +1,5 @@
-import { LayoutDashboard, Ticket, Users, GraduationCap } from 'lucide-react'
+import { LayoutDashboard, Ticket, Users } from 'lucide-react'
+import { LogoIcon } from '@/components/brand/logo'
 import { type SidebarData } from '../types'
 
 export const sidebarData: SidebarData = {
@@ -10,7 +11,7 @@ export const sidebarData: SidebarData = {
   teams: [
     {
       name: 'SIGA',
-      logo: GraduationCap,
+      logo: LogoIcon,
       plan: 'Mentoría - Sede Central',
     },
   ],
