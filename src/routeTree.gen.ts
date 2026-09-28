@@ -15,6 +15,7 @@ import { Route as AlumnoIndexRouteImport } from './routes/alumno/index'
 import { Route as LoginMentorRouteImport } from './routes/login/mentor'
 import { Route as LoginAlumnoRouteImport } from './routes/login/alumno'
 import { Route as AlumnoTicketsRouteImport } from './routes/alumno/tickets'
+import { Route as AlumnoSituacionRouteImport } from './routes/alumno/situacion'
 import { Route as errors404RouteImport } from './routes/(errors)/404'
 
 const AlumnoRouteRoute = AlumnoRouteRouteImport.update({
@@ -47,6 +48,11 @@ const AlumnoTicketsRoute = AlumnoTicketsRouteImport.update({
   path: '/tickets',
   getParentRoute: () => AlumnoRouteRoute,
 } as any)
+const AlumnoSituacionRoute = AlumnoSituacionRouteImport.update({
+  id: '/situacion',
+  path: '/situacion',
+  getParentRoute: () => AlumnoRouteRoute,
+} as any)
 const errors404Route = errors404RouteImport.update({
   id: '/(errors)/404',
   path: '/404',
@@ -57,6 +63,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/alumno': typeof AlumnoRouteRouteWithChildren
   '/404': typeof errors404Route
+  '/alumno/situacion': typeof AlumnoSituacionRoute
   '/alumno/tickets': typeof AlumnoTicketsRoute
   '/login/alumno': typeof LoginAlumnoRoute
   '/login/mentor': typeof LoginMentorRoute
@@ -65,6 +72,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/404': typeof errors404Route
+  '/alumno/situacion': typeof AlumnoSituacionRoute
   '/alumno/tickets': typeof AlumnoTicketsRoute
   '/login/alumno': typeof LoginAlumnoRoute
   '/login/mentor': typeof LoginMentorRoute
@@ -75,6 +83,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/alumno': typeof AlumnoRouteRouteWithChildren
   '/(errors)/404': typeof errors404Route
+  '/alumno/situacion': typeof AlumnoSituacionRoute
   '/alumno/tickets': typeof AlumnoTicketsRoute
   '/login/alumno': typeof LoginAlumnoRoute
   '/login/mentor': typeof LoginMentorRoute
@@ -86,6 +95,7 @@ export interface FileRouteTypes {
     | '/'
     | '/alumno'
     | '/404'
+    | '/alumno/situacion'
     | '/alumno/tickets'
     | '/login/alumno'
     | '/login/mentor'
@@ -94,6 +104,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/404'
+    | '/alumno/situacion'
     | '/alumno/tickets'
     | '/login/alumno'
     | '/login/mentor'
@@ -103,6 +114,7 @@ export interface FileRouteTypes {
     | '/'
     | '/alumno'
     | '/(errors)/404'
+    | '/alumno/situacion'
     | '/alumno/tickets'
     | '/login/alumno'
     | '/login/mentor'
@@ -161,6 +173,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AlumnoTicketsRouteImport
       parentRoute: typeof AlumnoRouteRoute
     }
+    '/alumno/situacion': {
+      id: '/alumno/situacion'
+      path: '/situacion'
+      fullPath: '/alumno/situacion'
+      preLoaderRoute: typeof AlumnoSituacionRouteImport
+      parentRoute: typeof AlumnoRouteRoute
+    }
     '/(errors)/404': {
       id: '/(errors)/404'
       path: '/404'
@@ -172,11 +191,13 @@ declare module '@tanstack/react-router' {
 }
 
 interface AlumnoRouteRouteChildren {
+  AlumnoSituacionRoute: typeof AlumnoSituacionRoute
   AlumnoTicketsRoute: typeof AlumnoTicketsRoute
   AlumnoIndexRoute: typeof AlumnoIndexRoute
 }
 
 const AlumnoRouteRouteChildren: AlumnoRouteRouteChildren = {
+  AlumnoSituacionRoute: AlumnoSituacionRoute,
   AlumnoTicketsRoute: AlumnoTicketsRoute,
   AlumnoIndexRoute: AlumnoIndexRoute,
 }
