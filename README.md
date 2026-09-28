@@ -10,7 +10,6 @@ SIGA es una aplicación web para la detección temprana del riesgo de deserción
 - **Detalle de estudiante**: trayectoria académica, participación y autopercepción en una vista consolidada.
 - **Tickets de seguimiento**: creación y listado de tickets asignados a mentores para gestionar el acompañamiento de cada estudiante.
 - **Autenticación**: acceso restringido mediante inicio de sesión.
-- **Panel de configuración**: ajustes de la aplicación y preferencias de la cuenta.
 - **Tema claro/oscuro**: interfaz adaptable a la preferencia del usuario.
 
 > Nota: SIGA es un MVP. Los datos de estudiantes y tickets son datos de prueba (mock) y se persisten en el localStorage del navegador; no hay backend ni API real.
@@ -23,7 +22,6 @@ SIGA es una aplicación web para la detección temprana del riesgo de deserción
 - **TanStack Router**, **TanStack Query** y **TanStack Table** para ruteo, manejo de datos y tablas
 - **React Hook Form** con **Zod** para formularios y validación
 - **Zustand** para el estado global, con persistencia en localStorage
-- **Vitest** y **Playwright** para las pruebas
 
 ## Puesta en marcha
 
@@ -46,14 +44,8 @@ pnpm build
 # Ejecutar el linter
 pnpm lint
 
-# Ejecutar las pruebas
-pnpm test
-```
-
-Las pruebas se ejecutan en un navegador real. Antes de correrlas por primera vez, instálalo con:
-
-```bash
-pnpm test:browser:install
+# Verificar el formato con Prettier
+pnpm format:check
 ```
 
 ## Estructura del proyecto
@@ -64,7 +56,6 @@ src/
 │   ├── students/   # Dashboard de estudiantes y detalle individual
 │   ├── tickets/    # Creación y listado de tickets de seguimiento
 │   ├── auth/       # Autenticación (inicio de sesión)
-│   ├── settings/   # Panel de configuración
 │   └── errors/     # Páginas de error
 ├── stores/
 │   └── students-store.ts  # Estado de estudiantes y tickets (Zustand + localStorage)
