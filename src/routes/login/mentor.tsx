@@ -27,7 +27,7 @@ function LoginMentor() {
         </Link>
       </div>
 
-      <h1 className='mb-4 text-xl font-semibold'>Ingresá como mentor</h1>
+      <h1 className='mb-4 text-2xl font-bold'>Ingresá como mentor</h1>
 
       <div className='space-y-2'>
         <button
