@@ -55,9 +55,12 @@ function MiSituacion() {
 
       <div className='grid grid-cols-2 gap-2'>
         {metricas.map((m) => (
-          <div key={m.titulo} className='rounded-md border bg-card p-3'>
+          <div
+            key={m.titulo}
+            className='rounded-xl border bg-card p-3 shadow-sm'
+          >
             <p className='text-xs text-muted-foreground'>{m.titulo}</p>
-            <p className='text-lg font-semibold'>{m.valor}</p>
+            <p className='text-lg font-semibold tabular-nums'>{m.valor}</p>
           </div>
         ))}
       </div>
@@ -103,7 +106,9 @@ function Encuesta({ alumno }: { alumno: Student }) {
         <div key={p.clave} className='flex flex-col gap-1'>
           <div className='flex items-center justify-between text-sm'>
             <label htmlFor={p.clave}>{p.texto}</label>
-            <span className='font-semibold'>{valores[p.clave]}</span>
+            <span className='font-semibold tabular-nums'>
+              {valores[p.clave]}
+            </span>
           </div>
           <input
             id={p.clave}
@@ -116,14 +121,14 @@ function Encuesta({ alumno }: { alumno: Student }) {
               setGuardado(false)
               setValores({ ...valores, [p.clave]: Number(e.target.value) })
             }}
-            className='w-full accent-[#4f46e5]'
+            className='w-full accent-primary'
           />
         </div>
       ))}
 
       <Button onClick={guardar}>Guardar mis respuestas</Button>
       {guardado && (
-        <p className='text-sm text-green-700'>
+        <p className='text-sm text-emerald-600 dark:text-emerald-400'>
           ¡Listo! Guardamos tus respuestas.
         </p>
       )}
