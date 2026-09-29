@@ -10,11 +10,11 @@ export const Route = createFileRoute('/alumno/')({
   component: Inicio,
 })
 
-const COLORES = {
-  bajo: '#16a34a',
-  medio: '#d97706',
-  alto: '#dc2626',
-}
+const CLASES_RING = {
+  bajo: 'stroke-emerald-500',
+  medio: 'stroke-amber-500',
+  alto: 'stroke-red-500',
+} as const
 
 const MENSAJES = {
   bajo: 'Venís bien. Seguí así.',
@@ -38,7 +38,7 @@ function Inicio() {
   }
 
   const score = calcularScore(alumno)
-  const color = COLORES[score.nivel]
+  const claseRing = CLASES_RING[score.nivel]
   const ticketAbierto = tickets.find(
     (t) => t.studentId === alumno.id && t.estado !== 'cerrado'
   )
@@ -63,7 +63,7 @@ function Inicio() {
             cy='70'
             r={RADIO}
             fill='none'
-            stroke={color}
+            className={claseRing}
             strokeWidth='12'
             strokeLinecap='round'
             strokeDasharray={CIRCUNFERENCIA}
@@ -89,7 +89,10 @@ function Inicio() {
           <h2 className='mb-2 text-sm font-medium'>Lo que más pesa hoy</h2>
           <ul className='flex flex-col gap-2'>
             {score.factores.map((f) => (
-              <li key={f} className='rounded-md border p-3 text-sm'>
+              <li
+                key={f}
+                className='rounded-xl border bg-card p-3 text-sm shadow-sm'
+              >
                 {f}
               </li>
             ))}
@@ -98,7 +101,7 @@ function Inicio() {
       )}
 
       {ticketAbierto && (
-        <div className='rounded-md border border-amber-500 bg-amber-100 p-3 text-sm text-amber-900'>
+        <div className='rounded-xl border border-amber-500/40 bg-amber-500/10 p-3 text-sm text-amber-700 dark:text-amber-400'>
           Tenés un pedido de ayuda en curso. Podés verlo en la pestaña Tickets.
         </div>
       )}
