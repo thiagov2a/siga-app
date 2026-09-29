@@ -6,6 +6,7 @@ import {
 } from '@tanstack/react-router'
 import { Home, Ticket, HeartHandshake, BookOpen } from 'lucide-react'
 import { useAuthStore } from '@/stores/auth-store'
+import { LogoIcon } from '@/components/brand/logo'
 
 export const Route = createFileRoute('/alumno')({
   beforeLoad: () => {
@@ -40,7 +41,10 @@ function AlumnoLayout() {
   return (
     <div className='mx-auto flex min-h-svh max-w-[390px] flex-col bg-background text-foreground'>
       <header className='flex h-14 shrink-0 items-center justify-between border-b bg-card px-4'>
-        <span className='font-bold'>SIGA</span>
+        <span className='flex items-center gap-2'>
+          <LogoIcon className='h-7 w-7' />
+          <span className='font-bold'>SIGA</span>
+        </span>
         <button
           onClick={handleSignOut}
           className='flex h-8 w-8 items-center justify-center rounded-full bg-primary text-xs font-medium text-primary-foreground'
