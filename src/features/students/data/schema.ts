@@ -57,7 +57,6 @@ export const studentSchema = z.object({
     necesidadPrincipal: z.string(),
     comentario: z.string(),
   }),
-  estadoTicket: ticketStatusSchema,
 })
 export type Student = z.infer<typeof studentSchema>
 

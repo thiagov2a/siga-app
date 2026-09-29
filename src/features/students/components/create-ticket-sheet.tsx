@@ -20,7 +20,11 @@ import {
   SheetTitle,
 } from '@/components/ui/sheet'
 import { Textarea } from '@/components/ui/textarea'
-import { interventionStates, interventionTypes } from '../data/data'
+import {
+  interventionStates,
+  interventionTypes,
+  resultadosIntervencion,
+} from '../data/data'
 import type {
   InterventionState,
   InterventionType,
@@ -41,6 +45,8 @@ export function CreateTicketSheet({ student, open, onOpenChange }: Props) {
   const [estado, setEstado] = useState<InterventionState>('pendiente')
   const [resultado, setResultado] = useState('')
 
+  const cerradoSinResultado = estado === 'cerrado' && !resultado
+
   const handleSubmit = () => {
     if (!notas.trim()) {
       toast.error(
@@ -48,18 +54,19 @@ export function CreateTicketSheet({ student, open, onOpenChange }: Props) {
       )
       return
     }
+    if (cerradoSinResultado) {
+      toast.error('Elegí un resultado antes de cerrar la intervención.')
+      return
+    }
 
-    createTicket(
-      {
-        studentId: student.id,
-        tipoIntervencion: tipo,
-        notas,
-        estado,
-        resultado: estado === 'cerrado' ? resultado : undefined,
-        origen: 'mentor',
-      },
-      estado === 'cerrado' ? 'resuelto' : 'en_seguimiento'
-    )
+    createTicket({
+      studentId: student.id,
+      tipoIntervencion: tipo,
+      notas,
+      estado,
+      resultado: estado === 'cerrado' ? resultado : undefined,
+      origen: 'mentor',
+    })
 
     toast.success(`Ticket creado para ${student.nombre}`)
     setNotas('')
@@ -129,19 +136,41 @@ export function CreateTicketSheet({ student, open, onOpenChange }: Props) {
           </div>
 
           <div className='space-y-2'>
-            <Label>Resultados esperados / Criterio de resolución</Label>
-            <Textarea
-              rows={3}
-              placeholder='Ingresá los resultados una vez cerrada la intervención...'
+            <Label>Resultado</Label>
+            <Select
               value={resultado}
-              onChange={(e) => setResultado(e.target.value)}
+              onValueChange={setResultado}
               disabled={estado !== 'cerrado'}
-            />
+            >
+              <SelectTrigger className='w-full'>
+                <SelectValue
+                  placeholder={
+                    estado === 'cerrado'
+                      ? 'Elegí un resultado...'
+                      : 'Se habilita al cerrar la intervención'
+                  }
+                />
+              </SelectTrigger>
+              <SelectContent>
+                {resultadosIntervencion.map((r) => (
+                  <SelectItem key={r.value} value={r.value}>
+                    {r.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            {cerradoSinResultado && (
+              <p className='text-xs text-destructive'>
+                Un ticket cerrado necesita un resultado.
+              </p>
+            )}
           </div>
         </div>
 
         <SheetFooter className='gap-2 sm:space-x-0'>
-          <Button onClick={handleSubmit}>Crear ticket</Button>
+          <Button onClick={handleSubmit} disabled={cerradoSinResultado}>
+            Crear ticket
+          </Button>
           <SheetClose asChild>
             <Button variant='outline'>Cancelar</Button>
           </SheetClose>

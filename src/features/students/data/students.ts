@@ -30,7 +30,6 @@ export const students: Student[] = [
       comentario:
         'Siento que la dificultad de las matemáticas me sobrepasa y no me alcanzan las horas porque tengo que trabajar a medio tiempo.',
     },
-    estadoTicket: 'sin_asignar',
   },
   {
     id: '2',
@@ -58,7 +57,6 @@ export const students: Student[] = [
       necesidadPrincipal: 'Información institucional',
       comentario: 'Tengo problemas de conectividad para cursar virtual.',
     },
-    estadoTicket: 'en_seguimiento',
   },
   {
     id: '3',
@@ -86,7 +84,6 @@ export const students: Student[] = [
       necesidadPrincipal: 'Tutor o Mentor',
       comentario: 'Me cuesta sostener el ritmo, me siento solo con esto.',
     },
-    estadoTicket: 'en_seguimiento',
   },
   {
     id: '4',
@@ -114,7 +111,6 @@ export const students: Student[] = [
       necesidadPrincipal: 'Ninguna',
       comentario: 'Todo bien por ahora.',
     },
-    estadoTicket: 'resuelto',
   },
   {
     id: '5',
@@ -142,7 +138,6 @@ export const students: Student[] = [
       necesidadPrincipal: 'Información institucional',
       comentario: 'Mi trabajo me deja poco margen para organizarme.',
     },
-    estadoTicket: 'sin_asignar',
   },
   {
     id: '6',
@@ -170,7 +165,6 @@ export const students: Student[] = [
       necesidadPrincipal: 'Tutor o Mentor',
       comentario: 'No estoy segura de haber elegido bien la carrera.',
     },
-    estadoTicket: 'en_seguimiento',
   },
   {
     id: '7',
@@ -198,7 +192,6 @@ export const students: Student[] = [
       necesidadPrincipal: 'Ayuda con contenidos',
       comentario: 'Necesito apoyo puntual en matemáticas avanzadas.',
     },
-    estadoTicket: 'resuelto',
   },
   {
     id: '8',
@@ -227,6 +220,5 @@ export const students: Student[] = [
       comentario:
         'Tengo un familiar enfermo y me está costando seguir el ritmo.',
     },
-    estadoTicket: 'sin_asignar',
   },
 ]

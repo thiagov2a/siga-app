@@ -37,16 +37,13 @@ export function PedirAyudaSheet({ open, onOpenChange, studentId }: Props) {
 
   function enviar() {
     if (!tipo) return
-    createTicket(
-      {
-        studentId,
-        tipoIntervencion: tipo,
-        notas,
-        estado: 'pendiente',
-        origen: 'alumno',
-      },
-      'sin_asignar'
-    )
+    createTicket({
+      studentId,
+      tipoIntervencion: tipo,
+      notas,
+      estado: 'pendiente',
+      origen: 'alumno',
+    })
     setTipo(null)
     setNotas('')
     onOpenChange(false)
