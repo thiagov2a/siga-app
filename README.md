@@ -2,7 +2,7 @@
 
 SIGA es una aplicación web para la detección temprana del riesgo de deserción universitaria. Permite monitorear la trayectoria académica de los estudiantes y dar seguimiento a los casos en riesgo mediante tickets asignados a mentores y coordinadores académicos.
 
-![Dashboard de SIGA](public/images/siga-dashboard.png)
+![Logo de SIGA](public/images/og-image.png)
 
 ## Características
 
