@@ -1,4 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
+import { Inbox } from 'lucide-react'
 import { useAuthStore } from '@/stores/auth-store'
 import { useStudentsStore } from '@/stores/students-store'
 import type {
@@ -19,15 +20,16 @@ const TIPOS: Record<InterventionType, string> = {
 const ESTADOS: Record<InterventionState, { texto: string; clase: string }> = {
   pendiente: {
     texto: 'Pendiente',
-    clase: 'bg-amber-100 text-amber-900',
+    clase: 'bg-amber-50 text-amber-700 dark:bg-amber-950 dark:text-amber-400',
   },
   en_curso: {
     texto: 'En seguimiento',
-    clase: 'bg-blue-100 text-blue-900',
+    clase: 'bg-brand-accent/10 text-brand-accent',
   },
   cerrado: {
     texto: 'Cerrado',
-    clase: 'bg-green-100 text-green-900',
+    clase:
+      'bg-emerald-50 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-400',
   },
 }
 
@@ -44,10 +46,13 @@ function MisTickets() {
       <h1 className='text-xl font-semibold'>Mis tickets</h1>
 
       {mios.length === 0 && (
-        <p className='text-sm text-muted-foreground'>
-          Todavía no pediste ayuda. Cuando lo hagas, vas a ver el seguimiento
-          acá.
-        </p>
+        <div className='flex flex-col items-center gap-2 rounded-xl border bg-card p-8 text-center shadow-sm'>
+          <Inbox aria-hidden className='h-8 w-8 text-muted-foreground/60' />
+          <p className='text-sm font-medium'>Todavía no pediste ayuda</p>
+          <p className='text-xs text-muted-foreground'>
+            Cuando lo hagas, vas a ver el seguimiento acá.
+          </p>
+        </div>
       )}
 
       {mios.map((t) => {
@@ -55,7 +60,7 @@ function MisTickets() {
         return (
           <div
             key={t.id}
-            className='flex flex-col gap-2 rounded-md border bg-card p-3'
+            className='flex flex-col gap-2 rounded-xl border bg-card p-3 shadow-sm'
           >
             <div className='flex items-center justify-between gap-2'>
               <span className='text-sm font-medium'>
