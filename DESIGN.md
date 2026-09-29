@@ -134,4 +134,3 @@ SIGA se siente como un **tablero institucional confiable y sereno**: navy profun
 | Panel desktop-only | `/panel*` | Spec del roadmap | n/a |
 | Font Inter (no custom) | theme.css | Sin dependencias nuevas de fuentes; personalidad se gana con weights/tracking/tabular-nums | Cambiar solo si se autoriza archivo de fuente local |
 | FAQ usa `<details>` nativo | `src/routes/index.tsx` | No existe `accordion.tsx` en ui/ y no se agregan deps | Usar `collapsible.tsx` si da mejor resultado (ya existe) |
-| DATA_SOURCES.md desactualizado | `src/features/students/data/` (untracked) | Fuera de los commits; menciona campos eliminados | Regenerar o borrar al cierre del proyecto |
