@@ -33,7 +33,7 @@ function LoginAlumno() {
         </Link>
       </div>
 
-      <h1 className='mb-4 text-xl font-semibold'>Ingresá como alumno</h1>
+      <h1 className='mb-4 text-2xl font-bold'>Ingresá como alumno</h1>
 
       <div className='space-y-2'>
         {students.map((s) => (

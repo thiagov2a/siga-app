@@ -43,7 +43,7 @@ function MisTickets() {
 
   return (
     <div className='flex flex-col gap-4'>
-      <h1 className='text-xl font-semibold'>Mis tickets</h1>
+      <h1 className='text-2xl font-bold'>Mis tickets</h1>
 
       {mios.length === 0 && (
         <div className='flex flex-col items-center gap-2 rounded-xl border bg-card p-8 text-center shadow-sm'>

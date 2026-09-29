@@ -51,7 +51,7 @@ function MiSituacion() {
 
   return (
     <div className='flex flex-col gap-6'>
-      <h1 className='text-xl font-semibold'>Mi situación</h1>
+      <h1 className='text-2xl font-bold'>Mi situación</h1>
 
       <div className='grid grid-cols-2 gap-2'>
         {metricas.map((m) => (

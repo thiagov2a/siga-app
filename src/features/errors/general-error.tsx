@@ -1,6 +1,7 @@
 import { useNavigate, useRouter } from '@tanstack/react-router'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
+import { LogoIcon } from '@/components/brand/logo'
 
 type GeneralErrorProps = React.HTMLAttributes<HTMLDivElement> & {
   minimal?: boolean
@@ -16,9 +17,12 @@ export function GeneralError({
     <div className={cn('h-svh w-full', className)}>
       <div className='m-auto flex h-full w-full flex-col items-center justify-center gap-2'>
         {!minimal && (
-          <h1 className='text-[7rem] leading-tight font-bold'>500</h1>
+          <>
+            <LogoIcon className='mb-3 h-12 w-12' />
+            <h1 className='text-[7rem] leading-tight font-bold'>500</h1>
+          </>
         )}
-        <span className='font-medium'>Ups, algo salió mal {`:')`}</span>
+        <span className='font-medium'>Algo salió mal</span>
         <p className='text-center text-muted-foreground'>
           Disculpá las molestias. <br /> Por favor, intentá de nuevo más tarde.
         </p>
