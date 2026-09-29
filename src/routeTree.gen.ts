@@ -9,127 +9,133 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
-import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
+import { Route as AlumnoRouteRouteImport } from './routes/alumno/route'
+import { Route as IndexRouteImport } from './routes/index'
+import { Route as AlumnoIndexRouteImport } from './routes/alumno/index'
+import { Route as LoginMentorRouteImport } from './routes/login/mentor'
+import { Route as LoginAlumnoRouteImport } from './routes/login/alumno'
 import { Route as errors404RouteImport } from './routes/(errors)/404'
-import { Route as authSignInRouteImport } from './routes/(auth)/sign-in'
-import { Route as AuthenticatedTicketsIndexRouteImport } from './routes/_authenticated/tickets/index'
-import { Route as AuthenticatedStudentsIndexRouteImport } from './routes/_authenticated/students/index'
-import { Route as AuthenticatedStudentsStudentIdRouteImport } from './routes/_authenticated/students/$studentId'
 
-const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
-  id: '/_authenticated',
+const AlumnoRouteRoute = AlumnoRouteRouteImport.update({
+  id: '/alumno',
+  path: '/alumno',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
+const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => AuthenticatedRouteRoute,
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AlumnoIndexRoute = AlumnoIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AlumnoRouteRoute,
+} as any)
+const LoginMentorRoute = LoginMentorRouteImport.update({
+  id: '/login/mentor',
+  path: '/login/mentor',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginAlumnoRoute = LoginAlumnoRouteImport.update({
+  id: '/login/alumno',
+  path: '/login/alumno',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const errors404Route = errors404RouteImport.update({
   id: '/(errors)/404',
   path: '/404',
   getParentRoute: () => rootRouteImport,
 } as any)
-const authSignInRoute = authSignInRouteImport.update({
-  id: '/(auth)/sign-in',
-  path: '/sign-in',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuthenticatedTicketsIndexRoute =
-  AuthenticatedTicketsIndexRouteImport.update({
-    id: '/tickets/',
-    path: '/tickets/',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedStudentsIndexRoute =
-  AuthenticatedStudentsIndexRouteImport.update({
-    id: '/students/',
-    path: '/students/',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedStudentsStudentIdRoute =
-  AuthenticatedStudentsStudentIdRouteImport.update({
-    id: '/students/$studentId',
-    path: '/students/$studentId',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof AuthenticatedIndexRoute
-  '/sign-in': typeof authSignInRoute
+  '/': typeof IndexRoute
+  '/alumno': typeof AlumnoRouteRouteWithChildren
   '/404': typeof errors404Route
-  '/students/$studentId': typeof AuthenticatedStudentsStudentIdRoute
-  '/students/': typeof AuthenticatedStudentsIndexRoute
-  '/tickets/': typeof AuthenticatedTicketsIndexRoute
+  '/login/alumno': typeof LoginAlumnoRoute
+  '/login/mentor': typeof LoginMentorRoute
+  '/alumno/': typeof AlumnoIndexRoute
 }
 export interface FileRoutesByTo {
-  '/sign-in': typeof authSignInRoute
+  '/': typeof IndexRoute
   '/404': typeof errors404Route
-  '/': typeof AuthenticatedIndexRoute
-  '/students/$studentId': typeof AuthenticatedStudentsStudentIdRoute
-  '/students': typeof AuthenticatedStudentsIndexRoute
-  '/tickets': typeof AuthenticatedTicketsIndexRoute
+  '/login/alumno': typeof LoginAlumnoRoute
+  '/login/mentor': typeof LoginMentorRoute
+  '/alumno': typeof AlumnoIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
-  '/(auth)/sign-in': typeof authSignInRoute
+  '/': typeof IndexRoute
+  '/alumno': typeof AlumnoRouteRouteWithChildren
   '/(errors)/404': typeof errors404Route
-  '/_authenticated/': typeof AuthenticatedIndexRoute
-  '/_authenticated/students/$studentId': typeof AuthenticatedStudentsStudentIdRoute
-  '/_authenticated/students/': typeof AuthenticatedStudentsIndexRoute
-  '/_authenticated/tickets/': typeof AuthenticatedTicketsIndexRoute
+  '/login/alumno': typeof LoginAlumnoRoute
+  '/login/mentor': typeof LoginMentorRoute
+  '/alumno/': typeof AlumnoIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/sign-in'
+    | '/alumno'
     | '/404'
-    | '/students/$studentId'
-    | '/students/'
-    | '/tickets/'
+    | '/login/alumno'
+    | '/login/mentor'
+    | '/alumno/'
   fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/sign-in'
-    | '/404'
-    | '/'
-    | '/students/$studentId'
-    | '/students'
-    | '/tickets'
+  to: '/' | '/404' | '/login/alumno' | '/login/mentor' | '/alumno'
   id:
     | '__root__'
-    | '/_authenticated'
-    | '/(auth)/sign-in'
+    | '/'
+    | '/alumno'
     | '/(errors)/404'
-    | '/_authenticated/'
-    | '/_authenticated/students/$studentId'
-    | '/_authenticated/students/'
-    | '/_authenticated/tickets/'
+    | '/login/alumno'
+    | '/login/mentor'
+    | '/alumno/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
-  authSignInRoute: typeof authSignInRoute
+  IndexRoute: typeof IndexRoute
+  AlumnoRouteRoute: typeof AlumnoRouteRouteWithChildren
   errors404Route: typeof errors404Route
+  LoginAlumnoRoute: typeof LoginAlumnoRoute
+  LoginMentorRoute: typeof LoginMentorRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/_authenticated': {
-      id: '/_authenticated'
-      path: ''
-      fullPath: '/'
-      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+    '/alumno': {
+      id: '/alumno'
+      path: '/alumno'
+      fullPath: '/alumno'
+      preLoaderRoute: typeof AlumnoRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/': {
-      id: '/_authenticated/'
+    '/': {
+      id: '/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof AuthenticatedIndexRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/alumno/': {
+      id: '/alumno/'
+      path: '/'
+      fullPath: '/alumno/'
+      preLoaderRoute: typeof AlumnoIndexRouteImport
+      parentRoute: typeof AlumnoRouteRoute
+    }
+    '/login/mentor': {
+      id: '/login/mentor'
+      path: '/login/mentor'
+      fullPath: '/login/mentor'
+      preLoaderRoute: typeof LoginMentorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login/alumno': {
+      id: '/login/alumno'
+      path: '/login/alumno'
+      fullPath: '/login/alumno'
+      preLoaderRoute: typeof LoginAlumnoRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/(errors)/404': {
       id: '/(errors)/404'
@@ -138,58 +144,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof errors404RouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/(auth)/sign-in': {
-      id: '/(auth)/sign-in'
-      path: '/sign-in'
-      fullPath: '/sign-in'
-      preLoaderRoute: typeof authSignInRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/tickets/': {
-      id: '/_authenticated/tickets/'
-      path: '/tickets'
-      fullPath: '/tickets/'
-      preLoaderRoute: typeof AuthenticatedTicketsIndexRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/students/': {
-      id: '/_authenticated/students/'
-      path: '/students'
-      fullPath: '/students/'
-      preLoaderRoute: typeof AuthenticatedStudentsIndexRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/students/$studentId': {
-      id: '/_authenticated/students/$studentId'
-      path: '/students/$studentId'
-      fullPath: '/students/$studentId'
-      preLoaderRoute: typeof AuthenticatedStudentsStudentIdRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
   }
 }
 
-interface AuthenticatedRouteRouteChildren {
-  AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
-  AuthenticatedStudentsStudentIdRoute: typeof AuthenticatedStudentsStudentIdRoute
-  AuthenticatedStudentsIndexRoute: typeof AuthenticatedStudentsIndexRoute
-  AuthenticatedTicketsIndexRoute: typeof AuthenticatedTicketsIndexRoute
+interface AlumnoRouteRouteChildren {
+  AlumnoIndexRoute: typeof AlumnoIndexRoute
 }
 
-const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
-  AuthenticatedIndexRoute: AuthenticatedIndexRoute,
-  AuthenticatedStudentsStudentIdRoute: AuthenticatedStudentsStudentIdRoute,
-  AuthenticatedStudentsIndexRoute: AuthenticatedStudentsIndexRoute,
-  AuthenticatedTicketsIndexRoute: AuthenticatedTicketsIndexRoute,
+const AlumnoRouteRouteChildren: AlumnoRouteRouteChildren = {
+  AlumnoIndexRoute: AlumnoIndexRoute,
 }
 
-const AuthenticatedRouteRouteWithChildren =
-  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+const AlumnoRouteRouteWithChildren = AlumnoRouteRoute._addFileChildren(
+  AlumnoRouteRouteChildren,
+)
 
 const rootRouteChildren: RootRouteChildren = {
-  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
-  authSignInRoute: authSignInRoute,
+  IndexRoute: IndexRoute,
+  AlumnoRouteRoute: AlumnoRouteRouteWithChildren,
   errors404Route: errors404Route,
+  LoginAlumnoRoute: LoginAlumnoRoute,
+  LoginMentorRoute: LoginMentorRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
