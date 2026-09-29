@@ -9,16 +9,25 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as PanelRouteRouteImport } from './routes/panel/route'
 import { Route as AlumnoRouteRouteImport } from './routes/alumno/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PanelIndexRouteImport } from './routes/panel/index'
 import { Route as AlumnoIndexRouteImport } from './routes/alumno/index'
+import { Route as PanelTicketsRouteImport } from './routes/panel/tickets'
 import { Route as LoginMentorRouteImport } from './routes/login/mentor'
 import { Route as LoginAlumnoRouteImport } from './routes/login/alumno'
 import { Route as AlumnoTicketsRouteImport } from './routes/alumno/tickets'
 import { Route as AlumnoSituacionRouteImport } from './routes/alumno/situacion'
 import { Route as AlumnoRecursosRouteImport } from './routes/alumno/recursos'
 import { Route as errors404RouteImport } from './routes/(errors)/404'
+import { Route as PanelEstudiantesStudentIdRouteImport } from './routes/panel/estudiantes/$studentId'
 
+const PanelRouteRoute = PanelRouteRouteImport.update({
+  id: '/panel',
+  path: '/panel',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AlumnoRouteRoute = AlumnoRouteRouteImport.update({
   id: '/alumno',
   path: '/alumno',
@@ -29,10 +38,20 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PanelIndexRoute = PanelIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => PanelRouteRoute,
+} as any)
 const AlumnoIndexRoute = AlumnoIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => AlumnoRouteRoute,
+} as any)
+const PanelTicketsRoute = PanelTicketsRouteImport.update({
+  id: '/tickets',
+  path: '/tickets',
+  getParentRoute: () => PanelRouteRoute,
 } as any)
 const LoginMentorRoute = LoginMentorRouteImport.update({
   id: '/login/mentor',
@@ -64,17 +83,27 @@ const errors404Route = errors404RouteImport.update({
   path: '/404',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PanelEstudiantesStudentIdRoute =
+  PanelEstudiantesStudentIdRouteImport.update({
+    id: '/estudiantes/$studentId',
+    path: '/estudiantes/$studentId',
+    getParentRoute: () => PanelRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/alumno': typeof AlumnoRouteRouteWithChildren
+  '/panel': typeof PanelRouteRouteWithChildren
   '/404': typeof errors404Route
   '/alumno/recursos': typeof AlumnoRecursosRoute
   '/alumno/situacion': typeof AlumnoSituacionRoute
   '/alumno/tickets': typeof AlumnoTicketsRoute
   '/login/alumno': typeof LoginAlumnoRoute
   '/login/mentor': typeof LoginMentorRoute
+  '/panel/tickets': typeof PanelTicketsRoute
   '/alumno/': typeof AlumnoIndexRoute
+  '/panel/': typeof PanelIndexRoute
+  '/panel/estudiantes/$studentId': typeof PanelEstudiantesStudentIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -84,32 +113,43 @@ export interface FileRoutesByTo {
   '/alumno/tickets': typeof AlumnoTicketsRoute
   '/login/alumno': typeof LoginAlumnoRoute
   '/login/mentor': typeof LoginMentorRoute
+  '/panel/tickets': typeof PanelTicketsRoute
   '/alumno': typeof AlumnoIndexRoute
+  '/panel': typeof PanelIndexRoute
+  '/panel/estudiantes/$studentId': typeof PanelEstudiantesStudentIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/alumno': typeof AlumnoRouteRouteWithChildren
+  '/panel': typeof PanelRouteRouteWithChildren
   '/(errors)/404': typeof errors404Route
   '/alumno/recursos': typeof AlumnoRecursosRoute
   '/alumno/situacion': typeof AlumnoSituacionRoute
   '/alumno/tickets': typeof AlumnoTicketsRoute
   '/login/alumno': typeof LoginAlumnoRoute
   '/login/mentor': typeof LoginMentorRoute
+  '/panel/tickets': typeof PanelTicketsRoute
   '/alumno/': typeof AlumnoIndexRoute
+  '/panel/': typeof PanelIndexRoute
+  '/panel/estudiantes/$studentId': typeof PanelEstudiantesStudentIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/alumno'
+    | '/panel'
     | '/404'
     | '/alumno/recursos'
     | '/alumno/situacion'
     | '/alumno/tickets'
     | '/login/alumno'
     | '/login/mentor'
+    | '/panel/tickets'
     | '/alumno/'
+    | '/panel/'
+    | '/panel/estudiantes/$studentId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -119,23 +159,31 @@ export interface FileRouteTypes {
     | '/alumno/tickets'
     | '/login/alumno'
     | '/login/mentor'
+    | '/panel/tickets'
     | '/alumno'
+    | '/panel'
+    | '/panel/estudiantes/$studentId'
   id:
     | '__root__'
     | '/'
     | '/alumno'
+    | '/panel'
     | '/(errors)/404'
     | '/alumno/recursos'
     | '/alumno/situacion'
     | '/alumno/tickets'
     | '/login/alumno'
     | '/login/mentor'
+    | '/panel/tickets'
     | '/alumno/'
+    | '/panel/'
+    | '/panel/estudiantes/$studentId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AlumnoRouteRoute: typeof AlumnoRouteRouteWithChildren
+  PanelRouteRoute: typeof PanelRouteRouteWithChildren
   errors404Route: typeof errors404Route
   LoginAlumnoRoute: typeof LoginAlumnoRoute
   LoginMentorRoute: typeof LoginMentorRoute
@@ -143,6 +191,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/panel': {
+      id: '/panel'
+      path: '/panel'
+      fullPath: '/panel'
+      preLoaderRoute: typeof PanelRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/alumno': {
       id: '/alumno'
       path: '/alumno'
@@ -157,12 +212,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/panel/': {
+      id: '/panel/'
+      path: '/'
+      fullPath: '/panel/'
+      preLoaderRoute: typeof PanelIndexRouteImport
+      parentRoute: typeof PanelRouteRoute
+    }
     '/alumno/': {
       id: '/alumno/'
       path: '/'
       fullPath: '/alumno/'
       preLoaderRoute: typeof AlumnoIndexRouteImport
       parentRoute: typeof AlumnoRouteRoute
+    }
+    '/panel/tickets': {
+      id: '/panel/tickets'
+      path: '/tickets'
+      fullPath: '/panel/tickets'
+      preLoaderRoute: typeof PanelTicketsRouteImport
+      parentRoute: typeof PanelRouteRoute
     }
     '/login/mentor': {
       id: '/login/mentor'
@@ -206,6 +275,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof errors404RouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/panel/estudiantes/$studentId': {
+      id: '/panel/estudiantes/$studentId'
+      path: '/estudiantes/$studentId'
+      fullPath: '/panel/estudiantes/$studentId'
+      preLoaderRoute: typeof PanelEstudiantesStudentIdRouteImport
+      parentRoute: typeof PanelRouteRoute
+    }
   }
 }
 
@@ -227,9 +303,26 @@ const AlumnoRouteRouteWithChildren = AlumnoRouteRoute._addFileChildren(
   AlumnoRouteRouteChildren,
 )
 
+interface PanelRouteRouteChildren {
+  PanelTicketsRoute: typeof PanelTicketsRoute
+  PanelIndexRoute: typeof PanelIndexRoute
+  PanelEstudiantesStudentIdRoute: typeof PanelEstudiantesStudentIdRoute
+}
+
+const PanelRouteRouteChildren: PanelRouteRouteChildren = {
+  PanelTicketsRoute: PanelTicketsRoute,
+  PanelIndexRoute: PanelIndexRoute,
+  PanelEstudiantesStudentIdRoute: PanelEstudiantesStudentIdRoute,
+}
+
+const PanelRouteRouteWithChildren = PanelRouteRoute._addFileChildren(
+  PanelRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AlumnoRouteRoute: AlumnoRouteRouteWithChildren,
+  PanelRouteRoute: PanelRouteRouteWithChildren,
   errors404Route: errors404Route,
   LoginAlumnoRoute: LoginAlumnoRoute,
   LoginMentorRoute: LoginMentorRoute,

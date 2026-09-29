@@ -1,6 +1,7 @@
 import { cn } from '@/lib/utils'
 import { riskLevels } from '../data/data'
 import type { RiskLevel } from '../data/schema'
+import type { EstadoDelTicket } from '../lib/ticket-estado'
 
 export function RiskBadge({ risk }: { risk: RiskLevel }) {
   const cfg = riskLevels.find((r) => r.value === risk)!
@@ -17,25 +18,26 @@ export function RiskBadge({ risk }: { risk: RiskLevel }) {
   )
 }
 
-export function TicketStatusBadge({
-  status,
-}: {
-  status: 'sin_asignar' | 'en_seguimiento' | 'resuelto'
-}) {
-  const cfg = {
-    sin_asignar: {
-      label: 'Sin asignar',
-      cls: 'bg-muted text-muted-foreground',
-    },
-    en_seguimiento: {
-      label: 'En seguimiento',
-      cls: 'bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-400',
-    },
-    resuelto: {
-      label: 'Resuelto',
-      cls: 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-400',
-    },
-  }[status]
+const estadoDelTicketCfg: Record<
+  EstadoDelTicket,
+  { label: string; cls: string }
+> = {
+  'Sin asignar': {
+    label: 'Sin asignar',
+    cls: 'bg-muted text-muted-foreground',
+  },
+  'En curso': {
+    label: 'En curso',
+    cls: 'bg-amber-50 text-amber-700 dark:bg-amber-950 dark:text-amber-400',
+  },
+  Cerrado: {
+    label: 'Cerrado',
+    cls: 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-400',
+  },
+}
+
+export function EstadoDelTicketBadge({ estado }: { estado: EstadoDelTicket }) {
+  const cfg = estadoDelTicketCfg[estado]
 
   return (
     <span

@@ -1,4 +1,4 @@
-import { LayoutDashboard, Ticket, Users } from 'lucide-react'
+import { LayoutDashboard, Ticket } from 'lucide-react'
 import { LogoIcon } from '@/components/brand/logo'
 import { type SidebarData } from '../types'
 
@@ -20,18 +20,13 @@ export const sidebarData: SidebarData = {
       title: 'General',
       items: [
         {
-          title: 'Dashboard',
-          url: '/',
+          title: 'Panel',
+          url: '/panel',
           icon: LayoutDashboard,
         },
         {
-          title: 'Estudiantes',
-          url: '/students',
-          icon: Users,
-        },
-        {
           title: 'Tickets',
-          url: '/tickets',
+          url: '/panel/tickets',
           icon: Ticket,
         },
       ],

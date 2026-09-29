@@ -13,7 +13,7 @@ type LogoProps = Omit<ImgHTMLAttributes<HTMLImageElement>, 'src'> & {
   variant?: LogoVariant
 }
 
-export function Logo({
+function Logo({
   variant = 'color',
   alt = 'SIGA',
   className,

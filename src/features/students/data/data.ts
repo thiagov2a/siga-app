@@ -81,6 +81,12 @@ export const interventionStates: {
   { value: 'cerrado', label: 'Cerrado' },
 ]
 
+export const resultadosIntervencion: { value: string; label: string }[] = [
+  { value: 'reincorporado', label: 'Reincorporado' },
+  { value: 'sin_cambios', label: 'Sin cambios' },
+  { value: 'deserto', label: 'Desertó' },
+]
+
 export const necesidades = [
   'Ayuda con contenidos',
   'Tutor o Mentor',
