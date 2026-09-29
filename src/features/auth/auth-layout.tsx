@@ -11,10 +11,10 @@ export function AuthLayout({ children }: AuthLayoutProps) {
         <div className='mb-2 flex flex-col items-center justify-center gap-2'>
           <h1 className='sr-only'>SIGA</h1>
           <div className='flex justify-center'>
-            <Logo variant='color' className='h-48 w-auto dark:hidden sm:h-60' />
+            <Logo variant='color' className='h-48 w-auto sm:h-60 dark:hidden' />
             <Logo
               variant='white'
-              className='hidden h-48 w-auto dark:block sm:h-60'
+              className='hidden h-48 w-auto sm:h-60 dark:block'
               alt=''
               aria-hidden
             />

@@ -13,8 +13,20 @@ type LogoProps = Omit<ImgHTMLAttributes<HTMLImageElement>, 'src'> & {
   variant?: LogoVariant
 }
 
-export function Logo({ variant = 'color', alt = 'SIGA', className, ...props }: LogoProps) {
-  return <img src={LOGO_SOURCES[variant]} alt={alt} className={className} {...props} />
+export function Logo({
+  variant = 'color',
+  alt = 'SIGA',
+  className,
+  ...props
+}: LogoProps) {
+  return (
+    <img
+      src={LOGO_SOURCES[variant]}
+      alt={alt}
+      className={className}
+      {...props}
+    />
+  )
 }
 
 export function LogoIcon(props: ImgHTMLAttributes<HTMLImageElement>) {
