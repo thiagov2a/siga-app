@@ -1,6 +1,13 @@
 import { useMemo, useState } from 'react'
 import { Link, useNavigate } from '@tanstack/react-router'
-import { ArrowLeft, ExternalLink, TicketPlus } from 'lucide-react'
+import {
+  Activity,
+  ArrowLeft,
+  BookOpen,
+  ClipboardList,
+  ExternalLink,
+  TicketPlus,
+} from 'lucide-react'
 import { useAuthStore } from '@/stores/auth-store'
 import { useStudentsStore } from '@/stores/students-store'
 import { cn } from '@/lib/utils'
@@ -45,8 +52,25 @@ function Dato({ label, value }: { label: string; value: string }) {
   return (
     <div className='flex items-baseline justify-between gap-2'>
       <span className='text-sm text-muted-foreground'>{label}</span>
-      <span className='font-medium'>{value}</span>
+      <span className='font-medium tabular-nums'>{value}</span>
     </div>
+  )
+}
+
+function CardIcon({
+  icon: Icon,
+  tint,
+}: {
+  icon: typeof BookOpen
+  tint: string
+}) {
+  return (
+    <span
+      aria-hidden
+      className={`flex h-9 w-9 items-center justify-center rounded-lg ${tint}`}
+    >
+      <Icon className='h-4 w-4' />
+    </span>
   )
 }
 
@@ -110,12 +134,19 @@ export function StudentDetail({ studentId }: { studentId: string }) {
             Legajo {student.legajo} · {student.carrera} · Semestre{' '}
             {student.semestre}
           </p>
-          <p className='mt-1 text-sm'>
-            <span className='font-semibold'>Score {score.valor}/100.</span>{' '}
+          <div className='mt-2 flex flex-wrap items-center gap-3'>
+            <div className='flex items-baseline gap-1 rounded-lg border bg-muted/40 px-3 py-1.5'>
+              <span className='text-2xl font-bold tabular-nums'>
+                {score.valor}
+              </span>
+              <span className='text-sm text-muted-foreground'>/100</span>
+            </div>
             {score.factores.length > 0 && (
-              <>Factores principales: {score.factores.join(' · ')}.</>
+              <p className='text-sm text-muted-foreground'>
+                Factores principales: {score.factores.join(' · ')}.
+              </p>
             )}
-          </p>
+          </div>
         </div>
         <div className='flex flex-wrap gap-2'>
           <Button onClick={() => setSheetOpen(true)}>
@@ -131,7 +162,8 @@ export function StudentDetail({ studentId }: { studentId: string }) {
 
       <div className='grid gap-4 lg:grid-cols-3'>
         <Card>
-          <CardHeader>
+          <CardHeader className='flex flex-row items-center gap-3 space-y-0'>
+            <CardIcon icon={BookOpen} tint='bg-primary/10 text-primary' />
             <CardTitle className='text-base'>Trayectoria académica</CardTitle>
           </CardHeader>
           <CardContent className='space-y-2'>
@@ -159,7 +191,11 @@ export function StudentDetail({ studentId }: { studentId: string }) {
         </Card>
 
         <Card>
-          <CardHeader>
+          <CardHeader className='flex flex-row items-center gap-3 space-y-0'>
+            <CardIcon
+              icon={Activity}
+              tint='bg-brand-accent/10 text-brand-accent'
+            />
             <CardTitle className='text-base'>Participación</CardTitle>
           </CardHeader>
           <CardContent className='space-y-2'>
@@ -200,7 +236,8 @@ export function StudentDetail({ studentId }: { studentId: string }) {
         </Card>
 
         <Card>
-          <CardHeader>
+          <CardHeader className='flex flex-row items-center gap-3 space-y-0'>
+            <CardIcon icon={ClipboardList} tint='bg-chart-1/10 text-chart-1' />
             <CardTitle className='text-base'>
               Autopercepción del alumno
             </CardTitle>
@@ -212,7 +249,7 @@ export function StudentDetail({ studentId }: { studentId: string }) {
                 <div key={b.key} className='space-y-1'>
                   <div className='flex items-center justify-between text-sm'>
                     <span className='text-muted-foreground'>{b.label}</span>
-                    <span className='font-medium'>{valor}/5</span>
+                    <span className='font-medium tabular-nums'>{valor}/5</span>
                   </div>
                   <ProgressBar
                     value={(valor / 5) * 100}

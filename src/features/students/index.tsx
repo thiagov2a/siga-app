@@ -1,6 +1,12 @@
 import { useMemo, useState } from 'react'
 import { Link } from '@tanstack/react-router'
-import { Search } from 'lucide-react'
+import {
+  AlertTriangle,
+  CheckCircle2,
+  Search,
+  Ticket,
+  Users,
+} from 'lucide-react'
 import { useStudentsStore } from '@/stores/students-store'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
@@ -70,22 +76,30 @@ export function StudentsDashboard() {
     {
       title: 'Riesgo alto',
       value: alto,
-      className: 'text-red-600 dark:text-red-400',
+      caption: 'Requieren intervención prioritaria',
+      icon: AlertTriangle,
+      box: 'bg-destructive/10 text-destructive',
     },
     {
       title: 'Monitoreados',
       value: students.length,
-      className: 'text-indigo-600 dark:text-indigo-400',
+      caption: 'En seguimiento activo',
+      icon: Users,
+      box: 'bg-primary/10 text-primary',
     },
     {
       title: 'Tickets abiertos',
       value: abiertos,
-      className: 'text-amber-600 dark:text-amber-400',
+      caption: 'Pendientes y en curso',
+      icon: Ticket,
+      box: 'bg-amber-500/10 text-amber-600 dark:text-amber-400',
     },
     {
       title: 'Resueltos',
       value: resueltos,
-      className: 'text-emerald-600 dark:text-emerald-400',
+      caption: 'Cerrados',
+      icon: CheckCircle2,
+      box: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400',
     },
   ]
 
@@ -101,13 +115,22 @@ export function StudentsDashboard() {
       <div className='grid gap-4 sm:grid-cols-2 lg:grid-cols-4'>
         {cards.map((c) => (
           <Card key={c.title}>
-            <CardHeader className='pb-2'>
+            <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
               <CardTitle className='text-sm font-medium text-muted-foreground'>
                 {c.title}
               </CardTitle>
+              <span
+                aria-hidden
+                className={`flex h-9 w-9 items-center justify-center rounded-lg ${c.box}`}
+              >
+                <c.icon className='h-4 w-4' />
+              </span>
             </CardHeader>
             <CardContent>
-              <p className={`text-3xl font-bold ${c.className}`}>{c.value}</p>
+              <p className='text-3xl font-bold tracking-tight tabular-nums'>
+                {c.value}
+              </p>
+              <p className='mt-1 text-xs text-muted-foreground'>{c.caption}</p>
             </CardContent>
           </Card>
         ))}
@@ -139,6 +162,12 @@ export function StudentsDashboard() {
       </div>
 
       <Card>
+        <CardHeader className='flex flex-row items-center justify-between space-y-0 border-b px-6 py-4'>
+          <CardTitle className='text-base font-semibold'>Estudiantes</CardTitle>
+          <span className='text-sm text-muted-foreground tabular-nums'>
+            {visibles.length} de {students.length}
+          </span>
+        </CardHeader>
         <CardContent className='p-0'>
           <Table>
             <TableHeader>
@@ -187,15 +216,15 @@ export function StudentsDashboard() {
                   <TableCell>
                     <RiskBadge risk={score.nivel} />
                   </TableCell>
-                  <TableCell className='text-end font-semibold'>
+                  <TableCell className='text-end font-semibold tabular-nums'>
                     {score.valor}
                   </TableCell>
                   <TableCell
-                    className={
+                    className={`tabular-nums${
                       student.asistencia < 70
                         ? 'font-medium text-red-600 dark:text-red-400'
-                        : undefined
-                    }
+                        : ''
+                    }`}
                   >
                     {student.asistencia}%
                   </TableCell>
@@ -213,11 +242,19 @@ export function StudentsDashboard() {
               ))}
               {visibles.length === 0 && (
                 <TableRow>
-                  <TableCell
-                    colSpan={6}
-                    className='h-24 text-center text-muted-foreground'
-                  >
-                    No se encontraron estudiantes.
+                  <TableCell colSpan={6} className='h-40'>
+                    <div className='flex flex-col items-center justify-center gap-2 text-center'>
+                      <Search
+                        aria-hidden
+                        className='h-8 w-8 text-muted-foreground/60'
+                      />
+                      <p className='text-sm font-medium'>
+                        No se encontraron estudiantes
+                      </p>
+                      <p className='text-xs text-muted-foreground'>
+                        Probá con otro nombre, legajo o nivel de riesgo.
+                      </p>
+                    </div>
                   </TableCell>
                 </TableRow>
               )}
