@@ -2,7 +2,9 @@ import { useMemo, useState } from 'react'
 import { Link } from '@tanstack/react-router'
 import {
   AlertTriangle,
+  BarChart3,
   CheckCircle2,
+  PieChart,
   Search,
   Ticket,
   Users,
@@ -72,6 +74,15 @@ export function StudentsDashboard() {
   ).length
   const resueltos = tickets.filter((t) => t.estado === 'cerrado').length
 
+  const conteo: Record<RiskLevel, number> = { alto: 0, medio: 0, bajo: 0 }
+  for (const f of filas) conteo[f.score.nivel] += 1
+
+  const actividadPorDia = Array.from(
+    { length: 14 },
+    (_, d) => students.filter((s) => s.actividadUltimos14Dias[d]).length
+  )
+  const maxActividad = Math.max(...actividadPorDia, 1)
+
   const cards = [
     {
       title: 'Riesgo alto',
@@ -134,6 +145,102 @@ export function StudentsDashboard() {
             </CardContent>
           </Card>
         ))}
+      </div>
+
+      <div className='grid gap-4 lg:grid-cols-2'>
+        <Card className='flex flex-col'>
+          <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
+            <CardTitle className='text-base font-semibold'>
+              Distribución de riesgo
+            </CardTitle>
+            <span
+              aria-hidden
+              className='flex h-9 w-9 items-center justify-center rounded-lg bg-destructive/10 text-destructive'
+            >
+              <PieChart className='h-4 w-4' />
+            </span>
+          </CardHeader>
+          <CardContent className='flex flex-1 flex-col justify-center space-y-3'>
+            <div
+              className='flex h-3 w-full overflow-hidden rounded-full bg-muted'
+              role='img'
+              aria-label={`Distribución: ${conteo.alto} en riesgo alto, ${conteo.medio} medio, ${conteo.bajo} bajo`}
+            >
+              {riskLevels.map((r) => (
+                <span
+                  key={r.value}
+                  className={r.dotClass}
+                  style={{
+                    width: `${(conteo[r.value] / Math.max(filas.length, 1)) * 100}%`,
+                  }}
+                />
+              ))}
+            </div>
+            <div className='flex flex-wrap justify-between gap-x-4 gap-y-1 text-sm'>
+              {riskLevels.map((r) => (
+                <span
+                  key={r.value}
+                  className='flex items-center gap-1.5 text-muted-foreground'
+                >
+                  <span
+                    aria-hidden
+                    className={`h-2 w-2 rounded-full ${r.dotClass}`}
+                  />
+                  {r.label}
+                  <span className='font-medium text-foreground tabular-nums'>
+                    {conteo[r.value]}
+                  </span>
+                </span>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
+            <CardTitle className='text-base font-semibold'>
+              Actividad — últimos 14 días
+            </CardTitle>
+            <span
+              aria-hidden
+              className='flex h-9 w-9 items-center justify-center rounded-lg bg-brand-accent/10 text-brand-accent'
+            >
+              <BarChart3 className='h-4 w-4' />
+            </span>
+          </CardHeader>
+          <CardContent className='space-y-2'>
+            <div
+              className='flex h-28 items-end gap-1'
+              role='img'
+              aria-label={`Estudiantes con actividad por día, máximo ${maxActividad}`}
+            >
+              {actividadPorDia.map((n, d) => (
+                <div
+                  key={d}
+                  className='flex h-full flex-1 flex-col justify-end'
+                  title={`Día ${d + 1}: ${n} ${n === 1 ? 'estudiante' : 'estudiantes'}`}
+                >
+                  <div
+                    className={`w-full rounded-t-sm transition-[height] duration-200 ease-out ${
+                      n === 0 ? 'bg-muted' : 'bg-primary'
+                    }`}
+                    style={{
+                      height:
+                        n === 0
+                          ? 2
+                          : `${Math.max((n / maxActividad) * 100, 8)}%`,
+                    }}
+                  />
+                </div>
+              ))}
+            </div>
+            <div className='flex justify-between text-xs text-muted-foreground'>
+              <span>Hace 14 días</span>
+              <span className='tabular-nums'>Máx. {maxActividad} al día</span>
+              <span>Hoy</span>
+            </div>
+          </CardContent>
+        </Card>
       </div>
 
       <div className='flex flex-wrap items-center gap-3'>
