@@ -45,7 +45,7 @@ function Inicio() {
 
   return (
     <div className='mx-auto flex max-w-md flex-col gap-6 p-4'>
-      <h1 className='text-xl font-semibold'>Hola, {alumno.nombre}</h1>
+      <h1 className='text-2xl font-bold'>Hola, {alumno.nombre}</h1>
 
       <div className='flex flex-col items-center gap-3'>
         <svg width='140' height='140' viewBox='0 0 140 140'>

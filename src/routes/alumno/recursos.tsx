@@ -44,7 +44,7 @@ function SectionHeader({
 function Recursos() {
   return (
     <div className='flex flex-col gap-6'>
-      <h1 className='text-xl font-semibold'>Recursos</h1>
+      <h1 className='text-2xl font-bold'>Recursos</h1>
 
       <section className='flex flex-col gap-2'>
         <SectionHeader
